@@ -1,0 +1,3 @@
+glifery_entity_hidden_type_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: GliferyEntityHiddenTypeBundle:Default:index }
