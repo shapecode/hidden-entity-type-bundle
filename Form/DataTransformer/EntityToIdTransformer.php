@@ -46,12 +46,15 @@ class EntityToIdTransformer implements DataTransformerInterface
         }
 
         $methodName = 'get'.ucfirst($this->property);
+        if (!method_exists($entity, $methodName)) {
+            throw new TransformationFailedException('There is no getter for property \'' . $this->property . '\' in class \'' . $this->class . '\'');
+        }
 
         return $entity->{$methodName}();
     }
 
     /**
-     * @param integer $id
+     * @param mixed $id
      * @return mixed|null|object
      */
     public function reverseTransform($id)
