@@ -1,0 +1,30 @@
+{
+    "name" : "glifery/entity-hidden-type-bundle",
+    "description" : "Hidden field for Symfony2 entities",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "Glifery",
+        "email" : "glifery@gmail.com"
+    }],
+    "keywords" : [
+        "entity hidden form type symfony"
+    ],
+    "license" : [
+        "MIT"
+    ],
+    "require" : {
+    },
+    "autoload" : {
+        "psr-0" : {
+            "Glifery\\EntityHiddenTypeBundle" : ""
+        }
+    },
+    "target-dir" : "Glifery/EntityHiddenTypeBundle",
+    "repositories" : [{
+    }],
+    "extra" : {
+        "branch-alias" : {
+            "dev-master" : "1.0.0-dev"
+        }
+    }
+}
