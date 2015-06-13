@@ -41,6 +41,7 @@ class EntityHiddenType extends AbstractType
         $resolver
             ->setRequired(array('class'))
             ->setDefaults(array(
+                    'data_class' => null,
                     'invalid_message' => 'The entity does not exist.',
                     'property' => 'id',
                     'em' => 'default'

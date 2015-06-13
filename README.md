@@ -50,8 +50,10 @@ You can use the `entity_hidden` type in your forms this way:
     // ...
     $builder->add('entity', 'entity_hidden', array(
         'class' => 'YourBundle:Entity'
-        'property' => 'entity_id', // You can change mapped property by using this option (default is 'id')
-        'em' => 'common_em' // You can use specified entity manager (default is 'default')
+        'property' => 'entity_id', // Mapped property name (default is 'id')
+        'data' => $entity, // Field value by default
+        'invalid_message' => 'The entity does not exist.', // Message that would be shown if no entity found
+        'em' => 'common_em' // You can use specified entity manager
     ));
 ```
 

@@ -53,9 +53,14 @@ class EntityToIdTransformer implements DataTransformerInterface
             return null;
         }
 
+        $className = $this->repository->getClassName();
+        if (!$entity instanceof $className) {
+            throw new TransformationFailedException(sprintf('Entity must be instance of %s, instance of %s has given.', $className, get_class($entity)));
+        }
+
         $methodName = 'get'.ucfirst($this->property);
         if (!method_exists($entity, $methodName)) {
-            throw new TransformationFailedException(sprintf('There is no getter for property "%s" in class "%s".', $this->property, $this->class));
+            throw new InvalidConfigurationException(sprintf('There is no getter for property "%s" in class "%s".', $this->property, $this->class));
         }
 
         return $entity->{$methodName}();
@@ -71,8 +76,7 @@ class EntityToIdTransformer implements DataTransformerInterface
             return null;
         }
 
-        $entity = $this->repository
-            ->findOneBy(array($this->property => $id));
+        $entity = $this->repository->findOneBy(array($this->property => $id));
 
         if (null === $entity) {
             throw new TransformationFailedException(sprintf('Can\'t find entity of class "%s" with property "%s" = "%s".', $this->class, $this->property, $id));
