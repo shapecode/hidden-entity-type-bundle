@@ -2,25 +2,25 @@
 
 namespace Glifery\EntityHiddenTypeBundle\Form\Type;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Form\AbstractType;
 use Glifery\EntityHiddenTypeBundle\Form\DataTransformer\EntityToIdTransformer;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class EntityHiddenType extends AbstractType
 {
     /**
-     * @var ObjectManager
+     * @var ManagerRegistry
      */
-    protected $objectManager;
+    protected $registry;
 
     /**
-     * @param ObjectManager $objectManager
+     * @param ManagerRegistry $registry
      */
-    public function __construct(ObjectManager $objectManager)
+    public function __construct(ManagerRegistry $registry)
     {
-        $this->objectManager = $objectManager;
+        $this->registry = $registry;
     }
 
     /**
@@ -29,7 +29,7 @@ class EntityHiddenType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new EntityToIdTransformer($this->objectManager, $options['class'], $options['property']);
+        $transformer = new EntityToIdTransformer($this->registry, $options['em'], $options['class'], $options['property']);
         $builder->addModelTransformer($transformer);
     }
 
@@ -42,7 +42,13 @@ class EntityHiddenType extends AbstractType
             ->setRequired(array('class'))
             ->setDefaults(array(
                     'invalid_message' => 'The entity does not exist.',
-                    'property' => 'id'
+                    'property' => 'id',
+                    'em' => 'default'
+                ))
+            ->setAllowedTypes(array(
+                    'invalid_message' => array('null', 'string'),
+                    'property' => array('null', 'string'),
+                    'em' => array('null', 'string', 'Doctrine\Common\Persistence\ObjectManager'),
                 ))
         ;
     }

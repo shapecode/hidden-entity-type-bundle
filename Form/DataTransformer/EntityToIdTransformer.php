@@ -2,17 +2,16 @@
 
 namespace Glifery\EntityHiddenTypeBundle\Form\DataTransformer;
 
-use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\InvalidConfigurationException;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class EntityToIdTransformer implements DataTransformerInterface
 {
-    /**
-     * @var ObjectManager
-     */
-    protected $objectManager;
-
     /**
      * @var string
      */
@@ -24,30 +23,39 @@ class EntityToIdTransformer implements DataTransformerInterface
     protected $property;
 
     /**
-     * @param ObjectManager $objectManager
+     * @var EntityManager
+     */
+    protected $em;
+
+    /** @var EntityRepository */
+    protected $repository;
+
+    /**
+     * @param ManagerRegistry $registry
      * @param string $class
      * @param string $property
      */
-    public function __construct(ObjectManager $objectManager, $class, $property)
+    public function __construct(ManagerRegistry $registry, $em, $class, $property)
     {
-        $this->objectManager = $objectManager;
         $this->class = $class;
         $this->property = $property;
+        $this->em = $this->getEntityManager($registry, $em);
+        $this->repository = $this->getEntityRepository($this->em, $this->class);
     }
 
     /**
      * @param mixed $entity
-     * @return mixed
+     * @return mixed|null
      */
     public function transform($entity)
     {
         if (null === $entity) {
-            return;
+            return null;
         }
 
         $methodName = 'get'.ucfirst($this->property);
         if (!method_exists($entity, $methodName)) {
-            throw new TransformationFailedException('There is no getter for property \'' . $this->property . '\' in class \'' . $this->class . '\'');
+            throw new TransformationFailedException(sprintf('There is no getter for property "%s" in class "%s".', $this->property, $this->class));
         }
 
         return $entity->{$methodName}();
@@ -63,14 +71,44 @@ class EntityToIdTransformer implements DataTransformerInterface
             return null;
         }
 
-        $entity = $this->objectManager
-            ->getRepository($this->class)
+        $entity = $this->repository
             ->findOneBy(array($this->property => $id));
 
         if (null === $entity) {
-            throw new TransformationFailedException();
+            throw new TransformationFailedException(sprintf('Can\'t find entity of class "%s" with property "%s" = "%s".', $this->class, $this->property, $id));
         }
 
         return $entity;
+    }
+
+    /**
+     * @param ManagerRegistry $registry
+     * @param ObjectManager|string $emName
+     * @return ObjectManager
+     */
+    private function getEntityManager(ManagerRegistry $registry, $emName) {
+        if ($emName instanceof ObjectManager) {
+            return $emName;
+        }
+
+        $emName = (string)$emName;
+        if ($em = $registry->getManager($emName)) {
+            return $em;
+        }
+
+        throw new InvalidConfigurationException(sprintf('Doctrine ORM Manager named "%s" does not exist.', $emName));
+    }
+
+    /**
+     * @param ObjectManager $em
+     * @param string $class
+     * @return EntityRepository
+     */
+    private function getEntityRepository(ObjectManager $em, $class) {
+        if ($repo = $em->getRepository($class)) {
+            return $repo;
+        }
+
+        throw new InvalidConfigurationException(sprintf('Entity Repository for class "%s" does not exist.', $class));
     }
 }
