@@ -10,7 +10,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\InvalidConfigurationException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-class EntityToIdTransformer implements DataTransformerInterface
+class ObjectToIdTransformer implements DataTransformerInterface
 {
     /**
      * @var string
@@ -25,7 +25,7 @@ class EntityToIdTransformer implements DataTransformerInterface
     /**
      * @var EntityManager
      */
-    protected $em;
+    protected $om;
 
     /** @var EntityRepository */
     protected $repository;
@@ -35,12 +35,12 @@ class EntityToIdTransformer implements DataTransformerInterface
      * @param string $class
      * @param string $property
      */
-    public function __construct(ManagerRegistry $registry, $em, $class, $property)
+    public function __construct(ManagerRegistry $registry, $om, $class, $property)
     {
         $this->class = $class;
         $this->property = $property;
-        $this->em = $this->getEntityManager($registry, $em);
-        $this->repository = $this->getEntityRepository($this->em, $this->class);
+        $this->em = $this->getObjectManager($registry, $om);
+        $this->repository = $this->getObjectRepository($this->em, $this->class);
     }
 
     /**
@@ -55,7 +55,7 @@ class EntityToIdTransformer implements DataTransformerInterface
 
         $className = $this->repository->getClassName();
         if (!$entity instanceof $className) {
-            throw new TransformationFailedException(sprintf('Entity must be instance of %s, instance of %s has given.', $className, get_class($entity)));
+            throw new TransformationFailedException(sprintf('Object must be instance of %s, instance of %s has given.', $className, get_class($entity)));
         }
 
         $methodName = 'get'.ucfirst($this->property);
@@ -87,32 +87,32 @@ class EntityToIdTransformer implements DataTransformerInterface
 
     /**
      * @param ManagerRegistry $registry
-     * @param ObjectManager|string $emName
+     * @param ObjectManager|string $omName
      * @return ObjectManager
      */
-    private function getEntityManager(ManagerRegistry $registry, $emName) {
-        if ($emName instanceof ObjectManager) {
-            return $emName;
+    private function getObjectManager(ManagerRegistry $registry, $omName) {
+        if ($omName instanceof ObjectManager) {
+            return $omName;
         }
 
-        $emName = (string)$emName;
-        if ($em = $registry->getManager($emName)) {
-            return $em;
+        $omName = (string)$omName;
+        if ($om = $registry->getManager($omName)) {
+            return $om;
         }
 
-        throw new InvalidConfigurationException(sprintf('Doctrine ORM Manager named "%s" does not exist.', $emName));
+        throw new InvalidConfigurationException(sprintf('Doctrine Manager named "%s" does not exist.', $omName));
     }
 
     /**
-     * @param ObjectManager $em
+     * @param ObjectManager $om
      * @param string $class
-     * @return EntityRepository
+     * @return ObjectRepository
      */
-    private function getEntityRepository(ObjectManager $em, $class) {
-        if ($repo = $em->getRepository($class)) {
+    private function getObjectRepository(ObjectManager $om, $class) {
+        if ($repo = $om->getRepository($class)) {
             return $repo;
         }
 
-        throw new InvalidConfigurationException(sprintf('Entity Repository for class "%s" does not exist.', $class));
+        throw new InvalidConfigurationException(sprintf('Repository for class "%s" does not exist.', $class));
     }
 }

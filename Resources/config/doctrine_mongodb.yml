@@ -1,0 +1,9 @@
+parameters:
+    glifery.entity_hidden_type.document_form_type.class: Glifery\EntityHiddenTypeBundle\Form\Type\DocumentHiddenType
+
+services:
+    glifery.entity_hidden_type.document_form_type:
+        class: %glifery.entity_hidden_type.document_form_type.class%
+        arguments: ["@doctrine_mongodb"]
+        tags:
+        - { name: form.type, alias: document_hidden }
