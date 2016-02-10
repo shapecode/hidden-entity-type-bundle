@@ -1,9 +1,0 @@
-parameters:
-    glifery.entity_hidden_type.form_type.class: Glifery\EntityHiddenTypeBundle\Form\Type\EntityHiddenType
-
-services:
-    glifery.entity_hidden_type.form_type:
-        class: %glifery.entity_hidden_type.form_type.class%
-        arguments: ["@doctrine"]
-        tags:
-        - { name: form.type, alias: entity_hidden }

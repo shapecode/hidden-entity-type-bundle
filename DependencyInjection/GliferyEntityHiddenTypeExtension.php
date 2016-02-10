@@ -23,6 +23,14 @@ class GliferyEntityHiddenTypeExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+
+        $bundles = $container->getParameter('kernel.bundles');
+
+        if (isset($bundles['DoctrineBundle'])) {
+            $loader->load('doctrine_orm.yml');
+        }
+        if (isset($bundles['DoctrineMongoDBBundle'])) {
+            $loader->load('doctrine_mongodb.yml');
+        }
     }
 }
