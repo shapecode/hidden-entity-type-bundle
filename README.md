@@ -41,7 +41,8 @@ You can use the `entity_hidden` type in your forms just like this:
         'class' => 'YourBundle:Entity' // That's all !
     ));
 ```
-You can also use the `document_hidden` type:```php
+You can also use the `document_hidden` type:
+```php
 <?php
     // ...
     $builder->add('document', 'document_hidden', array(
@@ -51,7 +52,7 @@ You can also use the `document_hidden` type:```php
 There is only one required option "class". You must specify entity class in Symfony format that you want to be used in your form.
 
 ### Advanced usage:
-You can use the `entity_hidden` or 'document_hidden' type in your forms this way:
+You can use the `entity_hidden` or `document_hidden` type in your forms this way:
 ```php
 <?php
     // ...
@@ -60,7 +61,8 @@ You can use the `entity_hidden` or 'document_hidden' type in your forms this way
         'property' => 'entity_id', // Mapped property name (default is 'id')
         'data' => $entity, // Field value by default
         'invalid_message' => 'The entity does not exist.', // Message that would be shown if no entity found
-        'em' => 'common_em' // You can use specified entity manager
+        'em' => 'common_em' // You can use specified entity manager for use with entity_hidden
+        'dm' => 'common_dm' // You can use specified document manager for use with document_hidden
     ));
 ```
 
