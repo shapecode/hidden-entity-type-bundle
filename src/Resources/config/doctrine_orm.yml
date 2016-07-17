@@ -1,0 +1,9 @@
+parameters:
+    shapecode_hidden_entity_type.entity_form_type.class: Shapecode\Bundle\HiddenEntityBundle\Form\Type\EntityHiddenType
+
+services:
+    shapecode_hidden_entity_type.entity_form_type:
+        class: "%shapecode_hidden_entity_type.entity_form_type.class%"
+        arguments: ["@doctrine"]
+        tags:
+            - { name: form.type }

@@ -1,27 +1,61 @@
 {
-    "name" : "glifery/entity-hidden-type-bundle",
-    "description" : "Hidden field for Symfony2 entities",
-    "type" : "symfony-bundle",
-    "authors" : [{
-        "name" : "Glifery",
-        "email" : "glifery@gmail.com"
-    }],
-    "keywords" : [
-        "entity hidden form type symfony"
+    "name": "shapecode/hidden-entity-type-bundle",
+    "description": "Hidden field for Symfony2 entities",
+    "keywords": [
+        "entity",
+        "hidden",
+        "form",
+        "type",
+        "symfony"
     ],
-    "license" : [
-        "MIT"
-    ],
-    "require" : {
-        "php": ">=5.3.0",
-        "symfony/framework-bundle": ">=2.3"
+    "type": "symfony-bundle",
+    "homepage": "https://github.com/shapecode/hidden-entity-type-bundle",
+    "support": {
+        "email": "support@shapecode.de",
+        "issues": "https://github.com/shapecode/hidden-entity-type-bundle/issues",
+        "source": "https://github.com/shapecode/hidden-entity-type-bundle/releases",
+        "wiki": "https://github.com/shapecode/hidden-entity-type-bundle/wiki"
     },
-    "autoload" : {
-        "psr-0" : {
-            "Glifery\\EntityHiddenTypeBundle" : ""
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nikita Loges",
+            "homepage": "http://nikita-loges.de",
+            "email": "develop@nikita-loges.de"
+        },
+        {
+            "name": "Glifery",
+            "email": "glifery@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "~5.5|~7.0",
+
+        "symfony/framework-bundle": "~2.8|~3.0",
+        "symfony/config": "~2.8|~3.0",
+        "symfony/http-kernel": "~2.8|~3.0",
+        "symfony/dependency-injection": "~2.8|~3.0",
+        "symfony/form": "~2.8|~3.0",
+        "symfony/options-resolver": "~2.8|~3.0",
+
+        "doctrine/orm": "~2.5",
+        "doctrine/common": "~2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shapecode\\Bundle\\HiddenEntityTypeBundle\\": ""
         }
     },
-    "target-dir" : "Glifery/EntityHiddenTypeBundle",
-    "repositories" : [{
-    }]
+    "autoload-dev": {
+        "psr-4": {
+            "Shapecode\\Bundle\\HiddenEntityTypeBundle\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-release/2.0": "2.0-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
