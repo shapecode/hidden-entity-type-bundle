@@ -1,6 +1,6 @@
 <?php
 
-namespace Shapecode\Bundle\HiddenEntityBundle\DependencyInjection;
+namespace Shapecode\Bundle\HiddenEntityTypeBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * Class ShapecodeHiddenEntityType
  *
- * @package Shapecode\Bundle\HiddenEntityBundle\DependencyInjection
+ * @package Shapecode\Bundle\HiddenEntityTypeBundle\DependencyInjection
  * @author  Nikita Loges
  */
 class ShapecodeHiddenEntityType extends Extension

@@ -25,7 +25,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new Shapecode\Bundle\HiddenEntityBundle\ShapecodeHiddenEntityTypeBundle(),
+        new Shapecode\Bundle\HiddenEntityTypeBundle\ShapecodeHiddenEntityTypeBundle(),
         // ...
     );
 }
@@ -38,7 +38,7 @@ You can use the type in your forms just like this:
 ```php
 <?php
 
-use Shapecode\Bundle\HiddenEntityBundle\Form\Type\HiddenEntityType;
+use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenEntityType;
 
 // ...
 $builder->add('entity', HiddenEntityType::class, array(
@@ -49,7 +49,7 @@ You can also use the `HiddenDocumentType::class` type:
 ```php
 <?php
 
-use Shapecode\Bundle\HiddenEntityBundle\Form\Type\HiddenDocumentType;
+use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenDocumentType;
 
 // ...
 $builder->add('document', HiddenDocumentType::class, array(

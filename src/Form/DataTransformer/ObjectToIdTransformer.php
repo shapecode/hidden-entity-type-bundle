@@ -1,6 +1,6 @@
 <?php
 
-namespace Shapecode\Bundle\HiddenEntityBundle\Form\DataTransformer;
+namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -14,7 +14,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 /**
  * Class ObjectToIdTransformer
  *
- * @package Shapecode\Bundle\HiddenEntityBundle\Form\DataTransformer
+ * @package Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer
  * @author  Nikita Loges
  */
 class ObjectToIdTransformer implements DataTransformerInterface

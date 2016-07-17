@@ -1,10 +1,10 @@
 <?php
 
-namespace Shapecode\Bundle\HiddenEntityBundle\Form\Type;
+namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
-use Shapecode\Bundle\HiddenEntityBundle\Form\DataTransformer\ObjectToIdTransformer;
+use Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer\ObjectToIdTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Class HiddenEntityType
  *
- * @package Shapecode\Bundle\HiddenEntityBundle\Form\Type
+ * @package Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type
  * @author  Nikita Loges
  */
 class HiddenEntityType extends AbstractType
