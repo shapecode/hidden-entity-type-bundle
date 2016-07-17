@@ -43,7 +43,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Shapecode\\Bundle\\HiddenEntityTypeBundle\\": ""
+            "Shapecode\\Bundle\\HiddenEntityTypeBundle\\": "src/"
         }
     },
     "autoload-dev": {
