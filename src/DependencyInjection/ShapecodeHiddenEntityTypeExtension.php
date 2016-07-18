@@ -8,12 +8,12 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Class ShapecodeHiddenEntityType
+ * Class ShapecodeHiddenEntityTypeExtension
  *
  * @package Shapecode\Bundle\HiddenEntityTypeBundle\DependencyInjection
  * @author  Nikita Loges
  */
-class ShapecodeHiddenEntityType extends Extension
+class ShapecodeHiddenEntityTypeExtension extends Extension
 {
     /**
      * @inheritdoc
