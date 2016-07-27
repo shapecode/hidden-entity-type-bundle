@@ -1,5 +1,5 @@
 parameters:
-    shapecode_hidden_entity_type.entity_form_type.class: Shapecode\Bundle\HiddenEntityBundle\Form\Type\EntityHiddenType
+    shapecode_hidden_entity_type.entity_form_type.class: Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenEntityType
 
 services:
     shapecode_hidden_entity_type.entity_form_type:

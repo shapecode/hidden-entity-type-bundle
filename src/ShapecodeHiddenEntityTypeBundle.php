@@ -1,13 +1,13 @@
 <?php
 
-namespace Shapecode\Bundle\HiddenEntityBundle;
+namespace Shapecode\Bundle\HiddenEntityTypeBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Class ShapecodeHiddenEntityTypeBundle
  *
- * @package Shapecode\Bundle\HiddenEntityBundle
+ * @package Shapecode\Bundle\HiddenEntityTypeBundle
  * @author  Nikita Loges
  */
 class ShapecodeHiddenEntityTypeBundle extends Bundle
