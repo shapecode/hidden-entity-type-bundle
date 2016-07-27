@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * @package Shapecode\Bundle\HiddenEntityTypeBundle\DependencyInjection
  * @author  Nikita Loges
  */
-class ShapecodeHiddenEntityType extends Extension
+class ShapecodeHiddenEntityTypeExtension extends Extension
 {
     /**
      * @inheritdoc
