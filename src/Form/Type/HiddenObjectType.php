@@ -52,6 +52,12 @@ class HiddenObjectType extends AbstractType
             'property'        => 'id'
         ]);
 
+        // bc fallback, will be removed
+        $resolver->setDefined([
+            'em',
+            'dm'
+        ]);
+
         $resolver->setAllowedTypes('invalid_message', ['null', 'string']);
         $resolver->setAllowedTypes('property', ['null', 'string']);
         $resolver->setAllowedTypes('multiple', ['boolean']);
