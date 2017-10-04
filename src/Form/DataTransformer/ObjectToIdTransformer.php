@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\InvalidConfigurationException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Class ObjectToIdTransformer
@@ -56,17 +57,10 @@ class ObjectToIdTransformer implements DataTransformerInterface
             return null;
         }
 
-        $className = $this->repository->getClassName();
-        if (!$entity instanceof $className) {
-            throw new TransformationFailedException(sprintf('Object must be instance of %s, instance of %s has given.', $className, get_class($entity)));
-        }
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $value = $accessor->getValue($entity, $this->property);
 
-        $methodName = 'get' . ucfirst($this->property);
-        if (!method_exists($entity, $methodName)) {
-            throw new InvalidConfigurationException(sprintf('There is no getter for property "%s" in class "%s".', $this->property, $this->class));
-        }
-
-        return $entity->{$methodName}();
+        return $value;
     }
 
     /**
@@ -97,22 +91,22 @@ class ObjectToIdTransformer implements DataTransformerInterface
      */
     private function getObjectManager(ManagerRegistry $registry, $class)
     {
-        if ($om = $registry->getManagerForClass($class)) {
-            return $om;
+        if ($manager = $registry->getManagerForClass($class)) {
+            return $manager;
         }
 
         throw new InvalidConfigurationException(sprintf('Doctrine Manager for class "%s" does not exist.', $class));
     }
 
     /**
-     * @param ObjectManager $om
+     * @param ObjectManager $manager
      * @param string        $class
      *
      * @return ObjectRepository
      */
-    private function getObjectRepository(ObjectManager $om, $class)
+    private function getObjectRepository(ObjectManager $manager, $class)
     {
-        if ($repo = $om->getRepository($class)) {
+        if ($repo = $manager->getRepository($class)) {
             return $repo;
         }
 

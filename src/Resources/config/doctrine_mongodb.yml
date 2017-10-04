@@ -1,9 +1,0 @@
-parameters:
-    shapecode_hidden_entity_type.document_form_type.class: Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenDocumentType
-
-services:
-    shapecode_hidden_entity_type.document_form_type:
-        class: "%shapecode_hidden_entity_type.document_form_type.class%"
-        arguments: ["@doctrine_mongodb"]
-        tags:
-            - { name: form.type }

@@ -15,20 +15,13 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class ShapecodeHiddenEntityTypeExtension extends Extension
 {
+
     /**
      * @inheritdoc
      */
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-
-        $bundles = $container->getParameter('kernel.bundles');
-
-        if (isset($bundles['DoctrineBundle'])) {
-            $loader->load('doctrine_orm.yml');
-        }
-        if (isset($bundles['DoctrineMongoDBBundle'])) {
-            $loader->load('doctrine_mongodb.yml');
-        }
+        $loader->load('form.yml');
     }
 }
