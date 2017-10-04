@@ -14,7 +14,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @package Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type
  * @author  Nikita Loges
- * @company tenolo GbR
  */
 class HiddenObjectType extends AbstractType
 {
