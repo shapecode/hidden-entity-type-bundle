@@ -3,6 +3,11 @@ Shapecode - Hidden Entity Type Bundle
 
 Hidden entity type for Symfony2 forms.
 
+[![Latest Stable Version](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/v/stable)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
+[![Total Downloads](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/downloads)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/v/unstable)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
+[![License](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/license)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
+
 ## What is it?
 
 This is a Symfony2 form type that allows you to add an entity in your form that would be displayed as a hidden input.
@@ -64,14 +69,16 @@ You can use the `HiddenEntityType` or `HiddenDocumentType` type in your forms th
 <?php
 // ...
 $builder->add('entity', HiddenEntityType::class, array(
-    'class' => YourBundleEntity::class,
-    'property' => 'entity_id', // Mapped property name (default is 'id')
-    'data' => $entity, // Field value by default
-    'invalid_message' => 'The entity does not exist.', // Message that would be shown if no entity found
-    'em' => 'common_em', // You can use specified entity manager for use with entity_hidden
-    'dm' => 'common_dm' // You can use specified document manager for use with document_hidden
+    'class' => YourBundleEntity::class, // required
+    'property' => 'entity_id', // Mapped property name (default is 'id'), not required
+    'multiple' => false, // support for an array of entities, not required
+    'data' => $entity, // Field value by default, not required
+    'invalid_message' => 'The entity does not exist.', // Message that would be shown if no entity found, not required
 ));
 ```
+
+### Upgrade from 2.0:
+The options 'em' and 'dm' are not necessary anymore. The manager will now be load automatically.
 
 ## Reporting an issue or a feature request
 Feel free to report any issues. If you have an idea to make it better go ahead and modify and submit pull requests.
