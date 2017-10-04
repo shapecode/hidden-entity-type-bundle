@@ -3,12 +3,10 @@
 namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectManager;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer\ObjectToIdTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Util\StringUtil;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -36,7 +34,7 @@ class HiddenEntityType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new ObjectToIdTransformer($this->registry, $options['em'], $options['class'], $options['property']);
+        $transformer = new ObjectToIdTransformer($this->registry, $options['class'], $options['property']);
         $builder->addModelTransformer($transformer);
     }
 
@@ -50,13 +48,11 @@ class HiddenEntityType extends AbstractType
         $resolver->setDefaults([
             'data_class'      => null,
             'invalid_message' => 'The entity does not exist.',
-            'property'        => 'id',
-            'em'              => 'default'
+            'property'        => 'id'
         ]);
 
         $resolver->setAllowedTypes('invalid_message', ['null', 'string']);
         $resolver->setAllowedTypes('property', ['null', 'string']);
-        $resolver->setAllowedTypes('em', ['null', 'string', ObjectManager::class]);
     }
 
     /**
@@ -72,7 +68,7 @@ class HiddenEntityType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'shapecode_' . StringUtil::fqcnToBlockPrefix(get_class($this));
+        return 'shapecode_hidden_entity';
     }
 
     /**

@@ -37,11 +37,11 @@ class ObjectToIdTransformer implements DataTransformerInterface
      * @param string          $class
      * @param string          $property
      */
-    public function __construct(ManagerRegistry $registry, $em, $class, $property)
+    public function __construct(ManagerRegistry $registry, $class, $property)
     {
         $this->class = $class;
         $this->property = $property;
-        $this->em = $this->getObjectManager($registry, $em);
+        $this->em = $this->getObjectManager($registry, $this->class);
         $this->repository = $this->getObjectRepository($this->em, $this->class);
     }
 
@@ -90,23 +90,18 @@ class ObjectToIdTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param ManagerRegistry      $registry
-     * @param ObjectManager|string $omName
+     * @param ManagerRegistry $registry
+     * @param string          $class
      *
      * @return ObjectManager
      */
-    private function getObjectManager(ManagerRegistry $registry, $omName)
+    private function getObjectManager(ManagerRegistry $registry, $class)
     {
-        if ($omName instanceof ObjectManager) {
-            return $omName;
-        }
-
-        $omName = (string)$omName;
-        if ($om = $registry->getManager($omName)) {
+        if ($om = $registry->getManagerForClass($class)) {
             return $om;
         }
 
-        throw new InvalidConfigurationException(sprintf('Doctrine Manager named "%s" does not exist.', $omName));
+        throw new InvalidConfigurationException(sprintf('Doctrine Manager for class "%s" does not exist.', $class));
     }
 
     /**
