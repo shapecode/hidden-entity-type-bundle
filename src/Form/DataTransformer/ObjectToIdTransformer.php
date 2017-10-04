@@ -3,12 +3,8 @@
 namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\InvalidConfigurationException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
@@ -21,29 +17,30 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 class ObjectToIdTransformer implements DataTransformerInterface
 {
 
+    /** @var ManagerRegistry */
+    protected $registry;
+
     /** @var string */
     protected $class;
 
     /** @var string */
     protected $property;
 
-    /** @var EntityManager */
-    protected $em;
-
-    /** @var EntityRepository */
-    protected $repository;
+    /** @var boolean */
+    protected $multiple = false;
 
     /**
      * @param ManagerRegistry $registry
-     * @param string          $class
+     * @param                 $class
      * @param string          $property
+     * @param bool            $multiple
      */
-    public function __construct(ManagerRegistry $registry, $class, $property)
+    public function __construct(ManagerRegistry $registry, $class, $property = 'id', $multiple = false)
     {
+        $this->registry = $registry;
         $this->class = $class;
         $this->property = $property;
-        $this->em = $this->getObjectManager($registry, $this->class);
-        $this->repository = $this->getObjectRepository($this->em, $this->class);
+        $this->multiple = $multiple;
     }
 
     /**
@@ -58,7 +55,18 @@ class ObjectToIdTransformer implements DataTransformerInterface
         }
 
         $accessor = PropertyAccess::createPropertyAccessor();
-        $value = $accessor->getValue($entity, $this->property);
+
+        if ($this->multiple && is_array($entity)) {
+            $value = [];
+
+            foreach ($entity as $e) {
+                $value[] = $accessor->getValue($e, $this->property);
+            }
+
+            $value = implode(',', $value);
+        } else {
+            $value = $accessor->getValue($entity, $this->property);
+        }
 
         return $value;
     }
@@ -74,42 +82,25 @@ class ObjectToIdTransformer implements DataTransformerInterface
             return null;
         }
 
-        $entity = $this->repository->findOneBy([$this->property => $id]);
+        if ($this->multiple) {
+            $ids = explode(',', $id);
+            $result = $this->getRepository()->findBy([$this->property => $ids]);
+        } else {
+            $result = $this->getRepository()->findOneBy([$this->property => $id]);
 
-        if (null === $entity) {
-            throw new TransformationFailedException(sprintf('Can\'t find entity of class "%s" with property "%s" = "%s".', $this->class, $this->property, $id));
+            if (null === $result) {
+                throw new TransformationFailedException(sprintf('Can\'t find entity of class "%s" with property "%s" = "%s".', $this->class, $this->property, $id));
+            }
         }
 
-        return $entity;
+        return $result;
     }
 
     /**
-     * @param ManagerRegistry $registry
-     * @param string          $class
-     *
-     * @return ObjectManager
-     */
-    private function getObjectManager(ManagerRegistry $registry, $class)
-    {
-        if ($manager = $registry->getManagerForClass($class)) {
-            return $manager;
-        }
-
-        throw new InvalidConfigurationException(sprintf('Doctrine Manager for class "%s" does not exist.', $class));
-    }
-
-    /**
-     * @param ObjectManager $manager
-     * @param string        $class
-     *
      * @return ObjectRepository
      */
-    private function getObjectRepository(ObjectManager $manager, $class)
+    protected function getRepository()
     {
-        if ($repo = $manager->getRepository($class)) {
-            return $repo;
-        }
-
-        throw new InvalidConfigurationException(sprintf('Repository for class "%s" does not exist.', $class));
+        return $this->registry->getRepository($this->class);
     }
 }

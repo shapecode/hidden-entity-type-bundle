@@ -35,7 +35,7 @@ class HiddenObjectType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new ObjectToIdTransformer($this->registry, $options['class'], $options['property']);
+        $transformer = new ObjectToIdTransformer($this->registry, $options['class'], $options['property'], $options['multiple']);
         $builder->addModelTransformer($transformer);
     }
 
@@ -47,6 +47,7 @@ class HiddenObjectType extends AbstractType
         $resolver->setRequired(['class']);
 
         $resolver->setDefaults([
+            'multiple'        => false,
             'data_class'      => null,
             'invalid_message' => 'The object does not exist.',
             'property'        => 'id'
@@ -54,6 +55,7 @@ class HiddenObjectType extends AbstractType
 
         $resolver->setAllowedTypes('invalid_message', ['null', 'string']);
         $resolver->setAllowedTypes('property', ['null', 'string']);
+        $resolver->setAllowedTypes('multiple', ['boolean']);
     }
 
     /**
