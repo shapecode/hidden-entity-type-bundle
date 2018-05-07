@@ -52,12 +52,6 @@ class HiddenObjectType extends AbstractType
             'property'        => 'id'
         ]);
 
-        // bc fallback, will be removed
-        $resolver->setDefined([
-            'em',
-            'dm'
-        ]);
-
         $resolver->setAllowedTypes('invalid_message', ['null', 'string']);
         $resolver->setAllowedTypes('property', ['null', 'string']);
         $resolver->setAllowedTypes('multiple', ['boolean']);
@@ -77,13 +71,5 @@ class HiddenObjectType extends AbstractType
     public function getBlockPrefix()
     {
         return 'shapecode_hidden_object';
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 }

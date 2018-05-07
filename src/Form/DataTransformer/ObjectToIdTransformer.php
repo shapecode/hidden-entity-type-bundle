@@ -31,11 +31,11 @@ class ObjectToIdTransformer implements DataTransformerInterface
 
     /**
      * @param ManagerRegistry $registry
-     * @param                 $class
+     * @param string          $class
      * @param string          $property
      * @param bool            $multiple
      */
-    public function __construct(ManagerRegistry $registry, $class, $property = 'id', $multiple = false)
+    public function __construct(ManagerRegistry $registry, string $class, string $property = 'id', bool $multiple = false)
     {
         $this->registry = $registry;
         $this->class = $class;
@@ -44,9 +44,7 @@ class ObjectToIdTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param mixed $entity
-     *
-     * @return mixed|null
+     * @inheritdoc
      */
     public function transform($entity)
     {
@@ -72,9 +70,7 @@ class ObjectToIdTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param mixed $id
-     *
-     * @return mixed|null|object
+     * @inheritdoc
      */
     public function reverseTransform($id)
     {
@@ -99,7 +95,7 @@ class ObjectToIdTransformer implements DataTransformerInterface
     /**
      * @return ObjectRepository
      */
-    protected function getRepository()
+    protected function getRepository(): ObjectRepository
     {
         return $this->registry->getRepository($this->class);
     }

@@ -39,12 +39,4 @@ class HiddenDocumentType extends AbstractType
     {
         return 'shapecode_hidden_document';
     }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }

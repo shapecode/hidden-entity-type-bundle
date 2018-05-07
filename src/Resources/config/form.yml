@@ -1,6 +1,4 @@
 services:
-    shapecode_hidden_entity_type.form_type.object:
-        class: Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenObjectType
+    Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenObjectType:
         arguments: ["@doctrine"]
-        tags:
-            - { name: form.type }
+        tags: [form.type]

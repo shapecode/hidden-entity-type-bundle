@@ -39,12 +39,4 @@ class HiddenEntityType extends AbstractType
     {
         return 'shapecode_hidden_entity';
     }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }
