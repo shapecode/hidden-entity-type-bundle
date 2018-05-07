@@ -29,19 +29,19 @@
         }
     ],
     "require": {
-        "php": "~5.5|~7.0",
+        "php": "^7.1",
 
-        "symfony/framework-bundle": "~2.8|~3.0|~4.0",
-        "symfony/config": "~2.8|~3.0|~4.0",
-        "symfony/http-kernel": "~2.8|~3.0|~4.0",
-        "symfony/dependency-injection": "~2.8|~3.0|~4.0",
-        "symfony/form": "~2.8|~3.0|~4.0",
-        "symfony/options-resolver": "~2.8|~3.0|~4.0",
-        "symfony/property-access": "~2.8|~3.0|~4.0",
+        "symfony/framework-bundle": "^2.8|^3.0|^4.0",
+        "symfony/config": "^2.8|^3.0|^4.0",
+        "symfony/http-kernel": "^2.8|^3.0|^4.0",
+        "symfony/dependency-injection": "^2.8|^3.0|^4.0",
+        "symfony/form": "^2.8|^3.0|^4.0",
+        "symfony/options-resolver": "^2.8|^3.0|^4.0",
+        "symfony/property-access": "^2.8|^3.0|^4.0",
 
-        "doctrine/doctrine-bundle": "~1.6",
-        "doctrine/orm": "~2.5",
-        "doctrine/common": "~2.6"
+        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/orm": "^2.5",
+        "doctrine/common": "^2.6"
     },
     "autoload": {
         "psr-4": {
