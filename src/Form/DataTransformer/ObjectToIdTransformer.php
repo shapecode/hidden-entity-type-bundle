@@ -54,7 +54,7 @@ class ObjectToIdTransformer implements DataTransformerInterface
 
         $accessor = PropertyAccess::createPropertyAccessor();
 
-        if ($this->multiple && is_array($entity)) {
+        if ($this->multiple && \is_array($entity)) {
             $value = [];
 
             foreach ($entity as $e) {
