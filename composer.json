@@ -1,6 +1,6 @@
 {
     "name": "shapecode/hidden-entity-type-bundle",
-    "description": "Hidden field for Symfony2 entities",
+    "description": "Hidden field for Symfony entities",
     "keywords": [
         "entity",
         "hidden",
@@ -49,14 +49,9 @@
             "Shapecode\\Bundle\\HiddenEntityTypeBundle\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Shapecode\\Bundle\\HiddenEntityTypeBundle\\Tests\\": "tests/"
-        }
-    },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.0-dev"
+            "dev-master": "3.1-dev"
         }
     },
     "minimum-stability": "dev",
