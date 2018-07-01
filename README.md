@@ -4,8 +4,10 @@ Shapecode - Hidden Entity Type Bundle
 Hidden entity type for Symfony2 forms.
 
 [![Latest Stable Version](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/v/stable)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
-[![Total Downloads](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/downloads)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/v/unstable)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
+[![Total Downloads](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/downloads)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
+[![Monthly Downloads](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/d/monthly)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
+[![Daily Downloads](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/d/daily)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
 [![License](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/license)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
 
 ## What is it?
