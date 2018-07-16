@@ -1,7 +1,9 @@
 Shapecode - Hidden Entity Type Bundle
 ============
 
-Hidden entity type for Symfony2 forms.
+Hidden entity type for Symfony forms.
+
+[![Donate](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/nicklog/donate)  
 
 [![Latest Stable Version](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/v/stable)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
 [![Total Downloads](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/downloads)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
