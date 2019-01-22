@@ -1,4 +1,7 @@
 services:
-    Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenObjectType:
-        arguments: ["@doctrine"]
-        tags: [form.type]
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenObjectType: ~
