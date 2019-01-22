@@ -7,6 +7,9 @@ use Doctrine\Common\Persistence\ObjectRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use function explode;
+use function implode;
+use function is_iterable;
 
 /**
  * Class ObjectToIdTransformer
@@ -53,20 +56,25 @@ class ObjectToIdTransformer implements DataTransformerInterface
         }
 
         $accessor = PropertyAccess::createPropertyAccessor();
+        $property = $this->getProperty();
 
-        if ($this->multiple && \is_iterable($entity)) {
+        if ($this->isMultiple() && is_iterable($entity)) {
             $value = [];
 
             foreach ($entity as $e) {
-                $value[] = $accessor->getValue($e, $this->property);
+                if ($accessor->isReadable($entity, $property)) {
+                    $value[] = $accessor->getValue($e, $property);
+                }
             }
 
-            $value = implode(',', $value);
-        } else {
-            $value = $accessor->getValue($entity, $this->property);
+            return implode(',', $value);
         }
 
-        return $value;
+        if (!$accessor->isReadable($entity, $property)) {
+            return null;
+        }
+
+        return $accessor->getValue($entity, $property);
     }
 
     /**
@@ -78,15 +86,20 @@ class ObjectToIdTransformer implements DataTransformerInterface
             return null;
         }
 
-        if ($this->multiple) {
-            $ids = explode(',', $id);
-            $result = $this->getRepository()->findBy([$this->property => $ids]);
-        } else {
-            $result = $this->getRepository()->findOneBy([$this->property => $id]);
+        $repo = $this->getRepository();
+        $property = $this->getProperty();
+        $class = $this->getClass();
 
-            if (null === $result) {
-                throw new TransformationFailedException(sprintf('Can\'t find entity of class "%s" with property "%s" = "%s".', $this->class, $this->property, $id));
-            }
+        if ($this->isMultiple()) {
+            $ids = explode(',', $id);
+
+            return $repo->findBy([$property => $ids]);
+        }
+
+        $result = $repo->findOneBy([$property => $id]);
+
+        if (null === $result) {
+            throw new TransformationFailedException(sprintf('Can\'t find entity of class "%s" with property "%s" = "%s".', $class, $property, $id));
         }
 
         return $result;
@@ -97,6 +110,30 @@ class ObjectToIdTransformer implements DataTransformerInterface
      */
     protected function getRepository(): ObjectRepository
     {
-        return $this->registry->getRepository($this->class);
+        return $this->registry->getRepository($this->getClass());
+    }
+
+    /**
+     * @return string
+     */
+    protected function getClass(): string
+    {
+        return $this->class;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getProperty(): string
+    {
+        return $this->property;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isMultiple(): bool
+    {
+        return $this->multiple;
     }
 }
