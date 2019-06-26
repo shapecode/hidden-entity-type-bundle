@@ -19,7 +19,7 @@ class ShapecodeHiddenEntityTypeExtension extends Extension
     /**
      * @inheritdoc
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $locator = new FileLocator(__DIR__ . '/../Resources/config');
         $loader = new Loader\YamlFileLoader($container, $locator);

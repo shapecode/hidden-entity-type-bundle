@@ -32,7 +32,7 @@ class HiddenObjectType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $transformer = new ObjectToIdTransformer($this->registry, $options['class'], $options['property'], $options['multiple']);
         $builder->addModelTransformer($transformer);
@@ -41,7 +41,7 @@ class HiddenObjectType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired(['class']);
 
@@ -60,7 +60,7 @@ class HiddenObjectType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function getParent()
+    public function getParent(): string
     {
         return HiddenType::class;
     }
@@ -68,7 +68,7 @@ class HiddenObjectType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'shapecode_hidden_object';
     }

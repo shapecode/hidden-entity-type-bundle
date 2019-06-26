@@ -17,7 +17,7 @@ class HiddenEntityType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'invalid_message' => 'The entity does not exist.',
@@ -27,7 +27,7 @@ class HiddenEntityType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function getParent()
+    public function getParent(): string
     {
         return HiddenObjectType::class;
     }
@@ -35,7 +35,7 @@ class HiddenEntityType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'shapecode_hidden_entity';
     }
