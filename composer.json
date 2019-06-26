@@ -42,7 +42,6 @@
         "symfony/property-access": "^3.4|^4.0",
 
         "doctrine/doctrine-bundle": "^1.6",
-        "doctrine/orm": "^2.6",
         "doctrine/common": "^2.8"
     },
     "autoload": {
