@@ -4,7 +4,6 @@ Shapecode - Hidden Entity Type Bundle
 Hidden entity type for Symfony forms.
 
 [![paypal](https://img.shields.io/badge/Donate-Paypal-blue.svg)](http://paypal.me/nloges)
-[![liberapay](https://img.shields.io/badge/Donate-Liberapay-yellow.svg)](https://liberapay.com/nicklog/donate)
 
 [![Latest Stable Version](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/v/stable)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/shapecode/hidden-entity-type-bundle/v/unstable)](https://packagist.org/packages/shapecode/hidden-entity-type-bundle)
