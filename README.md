@@ -20,7 +20,7 @@ This is a Symfony2 form type that allows you to add an entity in your form that 
 
 ### Step 1: Download HiddenEntityTypeBundle using composer
 ```bash
-$ php composer.phar require shapecode/hidden-entity-type-bundle
+$ composer require shapecode/hidden-entity-type-bundle
 ```
 Composer will install the bundle to your project's vendor directory.
 
@@ -81,7 +81,9 @@ $builder->add('entity', HiddenEntityType::class, array(
 ));
 ```
 
-### Upgrade from 2.0:
+## Upgrade
+
+### From 2.0
 The options 'em' and 'dm' are not necessary anymore. The manager will now be load automatically.
 
 ## Reporting an issue or a feature request
