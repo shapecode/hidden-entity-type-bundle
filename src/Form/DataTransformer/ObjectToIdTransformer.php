@@ -38,8 +38,12 @@ class ObjectToIdTransformer implements DataTransformerInterface
      * @param string          $property
      * @param bool            $multiple
      */
-    public function __construct(ManagerRegistry $registry, string $class, string $property = 'id', bool $multiple = false)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        string $class,
+        string $property = 'id',
+        bool $multiple = false
+    ) {
         $this->registry = $registry;
         $this->class = $class;
         $this->property = $property;
@@ -83,6 +87,10 @@ class ObjectToIdTransformer implements DataTransformerInterface
     public function reverseTransform($id)
     {
         if (!$id) {
+            if ($this->isMultiple()) {
+                return [];
+            }
+
             return null;
         }
 
