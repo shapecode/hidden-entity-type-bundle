@@ -1,0 +1,8 @@
+version: '3.6'
+services:
+    app:
+        image: webdevops/php:7.4
+        volumes:
+            - ./:/app/
+        env_file:
+            - etc/environment.yml
