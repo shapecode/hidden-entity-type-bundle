@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -9,21 +11,11 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * Class HiddenObjectType
- *
- * @package Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type
- * @author  Nikita Loges
- */
 class HiddenObjectType extends AbstractType
 {
-
     /** @var ManagerRegistry */
     protected $registry;
 
-    /**
-     * @param ManagerRegistry $registry
-     */
     public function __construct(ManagerRegistry $registry)
     {
         $this->registry = $registry;
@@ -32,7 +24,7 @@ class HiddenObjectType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
         $transformer = new ObjectToIdTransformer($this->registry, $options['class'], $options['property'], $options['multiple']);
         $builder->addModelTransformer($transformer);
@@ -41,7 +33,7 @@ class HiddenObjectType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $resolver) : void
     {
         $resolver->setRequired(['class']);
 
@@ -49,7 +41,7 @@ class HiddenObjectType extends AbstractType
             'multiple'        => false,
             'data_class'      => null,
             'invalid_message' => 'The object does not exist.',
-            'property'        => 'id'
+            'property'        => 'id',
         ]);
 
         $resolver->setAllowedTypes('invalid_message', ['null', 'string']);
@@ -60,7 +52,7 @@ class HiddenObjectType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function getParent(): string
+    public function getParent() : string
     {
         return HiddenType::class;
     }
@@ -68,7 +60,7 @@ class HiddenObjectType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function getBlockPrefix(): string
+    public function getBlockPrefix() : string
     {
         return 'shapecode_hidden_object';
     }

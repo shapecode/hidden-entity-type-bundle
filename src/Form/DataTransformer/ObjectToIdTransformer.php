@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -10,16 +12,10 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use function explode;
 use function implode;
 use function is_iterable;
+use function sprintf;
 
-/**
- * Class ObjectToIdTransformer
- *
- * @package Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer
- * @author  Nikita Loges
- */
 class ObjectToIdTransformer implements DataTransformerInterface
 {
-
     /** @var ManagerRegistry */
     protected $registry;
 
@@ -29,15 +25,9 @@ class ObjectToIdTransformer implements DataTransformerInterface
     /** @var string */
     protected $property;
 
-    /** @var boolean */
+    /** @var bool */
     protected $multiple = false;
 
-    /**
-     * @param ManagerRegistry $registry
-     * @param string          $class
-     * @param string          $property
-     * @param bool            $multiple
-     */
     public function __construct(
         ManagerRegistry $registry,
         string $class,
@@ -45,17 +35,19 @@ class ObjectToIdTransformer implements DataTransformerInterface
         bool $multiple = false
     ) {
         $this->registry = $registry;
-        $this->class = $class;
+        $this->class    = $class;
         $this->property = $property;
         $this->multiple = $multiple;
     }
 
     /**
-     * @inheritdoc
+     * @param mixed $entity
+     *
+     * @return mixed
      */
     public function transform($entity)
     {
-        if (null === $entity) {
+        if ($entity === null) {
             return null;
         }
 
@@ -66,15 +58,17 @@ class ObjectToIdTransformer implements DataTransformerInterface
             $value = [];
 
             foreach ($entity as $e) {
-                if ($accessor->isReadable($entity, $property)) {
-                    $value[] = $accessor->getValue($e, $property);
+                if (! $accessor->isReadable($entity, $property)) {
+                    continue;
                 }
+
+                $value[] = $accessor->getValue($e, $property);
             }
 
             return implode(',', $value);
         }
 
-        if (!$accessor->isReadable($entity, $property)) {
+        if (! $accessor->isReadable($entity, $property)) {
             return null;
         }
 
@@ -82,11 +76,13 @@ class ObjectToIdTransformer implements DataTransformerInterface
     }
 
     /**
-     * @inheritdoc
+     * @param mixed $id
+     *
+     * @return mixed
      */
     public function reverseTransform($id)
     {
-        if (!$id) {
+        if ($id === null) {
             if ($this->isMultiple()) {
                 return [];
             }
@@ -94,9 +90,9 @@ class ObjectToIdTransformer implements DataTransformerInterface
             return null;
         }
 
-        $repo = $this->getRepository();
+        $repo     = $this->getRepository();
         $property = $this->getProperty();
-        $class = $this->getClass();
+        $class    = $this->getClass();
 
         if ($this->isMultiple()) {
             $ids = explode(',', $id);
@@ -106,41 +102,29 @@ class ObjectToIdTransformer implements DataTransformerInterface
 
         $result = $repo->findOneBy([$property => $id]);
 
-        if (null === $result) {
+        if ($result === null) {
             throw new TransformationFailedException(sprintf('Can\'t find entity of class "%s" with property "%s" = "%s".', $class, $property, $id));
         }
 
         return $result;
     }
 
-    /**
-     * @return ObjectRepository
-     */
-    protected function getRepository(): ObjectRepository
+    protected function getRepository() : ObjectRepository
     {
         return $this->registry->getRepository($this->getClass());
     }
 
-    /**
-     * @return string
-     */
-    protected function getClass(): string
+    protected function getClass() : string
     {
         return $this->class;
     }
 
-    /**
-     * @return string
-     */
-    protected function getProperty(): string
+    protected function getProperty() : string
     {
         return $this->property;
     }
 
-    /**
-     * @return bool
-     */
-    protected function isMultiple(): bool
+    protected function isMultiple() : bool
     {
         return $this->multiple;
     }
