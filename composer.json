@@ -42,6 +42,7 @@
         "symfony/property-access": "^3.4|^4.0",
 
         "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/persistence": "^1.0",
         "doctrine/common": "^2.8"
     },
     "require-dev": {
@@ -52,11 +53,17 @@
         "phpstan/phpstan-deprecation-rules": "^0.11.2",
         "phpstan/phpstan-phpunit": "^0.11.2",
         "phpstan/phpstan-strict-rules": "^0.11.1",
-        "maglnet/composer-require-checker": "^2.0"
+        "maglnet/composer-require-checker": "^2.0",
+        "phpunit/phpunit": "^8.4"
     },
     "autoload": {
         "psr-4": {
             "Shapecode\\Bundle\\HiddenEntityTypeBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shapecode\\Bundle\\HiddenEntityTypeBundle\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -67,6 +74,7 @@
         ],
         "phpstan": "./vendor/bin/phpstan analyse ./src",
         "crc": "./vendor/bin/composer-require-checker --config-file=./composer-require-checker.json",
+        "phpunit": "./vendor/bin/phpunit",
         "cs-fix": "./vendor/bin/phpcbf",
         "cs-check": "./vendor/bin/phpcs -s"
     },
