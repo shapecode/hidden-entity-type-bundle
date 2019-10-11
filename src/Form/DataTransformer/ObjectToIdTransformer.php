@@ -140,7 +140,7 @@ class ObjectToIdTransformer implements DataTransformerInterface
         $reflectionExtractor = new ReflectionExtractor();
         $propertyInfo        = new PropertyInfoExtractor([$reflectionExtractor]);
 
-        $properties = $propertyInfo->getProperties($this->class);
+        $properties = $propertyInfo->getProperties($this->class) ?? [];
 
         if (! in_array($this->property, $properties, true)) {
             throw new NoSuchPropertyException(sprintf('property %s is missing in class %s', $this->property, $this->class));
