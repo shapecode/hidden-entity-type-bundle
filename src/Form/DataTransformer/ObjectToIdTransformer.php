@@ -8,9 +8,13 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
+use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use function explode;
 use function implode;
+use function in_array;
 use function is_iterable;
 use function sprintf;
 
@@ -38,6 +42,8 @@ class ObjectToIdTransformer implements DataTransformerInterface
         $this->class    = $class;
         $this->property = $property;
         $this->multiple = $multiple;
+
+        $this->validate();
     }
 
     /**
@@ -127,5 +133,17 @@ class ObjectToIdTransformer implements DataTransformerInterface
     protected function isMultiple() : bool
     {
         return $this->multiple;
+    }
+
+    protected function validate() : void
+    {
+        $reflectionExtractor = new ReflectionExtractor();
+        $propertyInfo        = new PropertyInfoExtractor([$reflectionExtractor]);
+
+        $properties = $propertyInfo->getProperties($this->class);
+
+        if (! in_array($this->property, $properties, true)) {
+            throw new NoSuchPropertyException(sprintf('property %s is missing in class %s', $this->property, $this->class));
+        }
     }
 }
