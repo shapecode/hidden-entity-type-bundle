@@ -64,7 +64,7 @@ class ObjectToIdTransformer implements DataTransformerInterface
             $value = [];
 
             foreach ($entity as $e) {
-                if (! $accessor->isReadable($entity, $property)) {
+                if (! $accessor->isReadable($e, $property)) {
                     continue;
                 }
 
