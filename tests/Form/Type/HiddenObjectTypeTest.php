@@ -15,11 +15,8 @@ use function array_keys;
 
 class HiddenObjectTypeTest extends TypeTestCase
 {
-    /** @var ManagerRegistry */
-    private $registry;
-
-    /** @var TestObject */
-    private $testObject;
+    private ManagerRegistry $registry;
+    private TestObject $testObject;
 
     protected function setUp() : void
     {

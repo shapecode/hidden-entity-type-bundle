@@ -6,8 +6,7 @@ namespace Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model;
 
 class TestObject
 {
-    /** @var string|null */
-    protected $name;
+    protected ?string $name = null;
 
     public function getName() : ?string
     {

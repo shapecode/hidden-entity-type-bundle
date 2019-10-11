@@ -6,8 +6,7 @@ namespace Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model;
 
 class TestFormModel
 {
-    /** @var TestObject|null */
-    private $object;
+    private ?TestObject $object = null;
 
     public function getObject() : ?TestObject
     {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer\ObjectsToIdTransformer;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer\ObjectToIdTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -13,8 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class HiddenObjectType extends AbstractType
 {
-    /** @var ManagerRegistry */
-    protected $registry;
+    protected ManagerRegistry $registry;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -26,7 +26,14 @@ class HiddenObjectType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
-        $transformer = new ObjectToIdTransformer($this->registry, $options['class'], $options['property'], $options['multiple']);
+        $transformerClassName = $options['multiple'] ? ObjectsToIdTransformer::class : ObjectToIdTransformer::class;
+
+        $transformer = new $transformerClassName(
+            $this->registry,
+            $options['class'],
+            $options['property']
+        );
+
         $builder->addModelTransformer($transformer);
     }
 
