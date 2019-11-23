@@ -1,5 +1,4 @@
-Shapecode - Hidden Entity Type Bundle
-============
+# Shapecode - Hidden Entity Type Bundle
 
 Hidden entity type for Symfony forms.
 
@@ -26,19 +25,16 @@ $ composer require shapecode/hidden-entity-type-bundle
 Composer will install the bundle to your project's vendor directory.
 
 ### Step 2: Enable the bundle
-Enable the bundle in the kernel:
+Enable the bundle in the config if flex it did´nt do it for you:
 ```php
 <?php
-// app/AppKernel.php
+// config/bundles.php
 
-public function registerBundles()
-{
-    $bundles = array(
-        // ...
-        new Shapecode\Bundle\HiddenEntityTypeBundle\ShapecodeHiddenEntityTypeBundle(),
-        // ...
-    );
-}
+return [
+    // ...
+    Shapecode\Bundle\HiddenEntityTypeBundle\ShapecodeHiddenEntityTypeBundle::class => ['all' => true],
+    // ...
+];
 ```
 
 ## Usage
@@ -81,11 +77,6 @@ $builder->add('entity', HiddenEntityType::class, array(
     'invalid_message' => 'The entity does not exist.', // Message that would be shown if no entity found, not required
 ));
 ```
-
-## Upgrade
-
-### From 2.0
-The options 'em' and 'dm' are not necessary anymore. The manager will now be load automatically.
 
 ## Reporting an issue or a feature request
 Feel free to report any issues. If you have an idea to make it better go ahead and modify and submit pull requests.

@@ -30,17 +30,17 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.3",
 
-        "symfony/framework-bundle": "^4.4|^5.0",
-        "symfony/config": "^4.4|^5.0",
-        "symfony/http-kernel": "^4.4|^5.0",
-        "symfony/dependency-injection": "^4.4|^5.0",
-        "symfony/form": "^4.4|^5.0",
-        "symfony/yaml": "^4.4|^5.0",
-        "symfony/options-resolver": "^4.4|^5.0",
-        "symfony/property-access": "^4.4|^5.0",
-        "symfony/property-info": "^4.4|^5.0",
+        "symfony/framework-bundle": "^3.4|^4.4|^5.0",
+        "symfony/config": "^3.4|^4.4|^5.0",
+        "symfony/http-kernel": "^3.4|^4.4|^5.0",
+        "symfony/dependency-injection": "^3.4|^4.4|^5.0",
+        "symfony/form": "^3.4|^4.4|^5.0",
+        "symfony/yaml": "^3.4|^4.4|^5.0",
+        "symfony/options-resolver": "^3.4|^4.4|^5.0",
+        "symfony/property-access": "^3.4|^4.4|^5.0",
+        "symfony/property-info": "^3.4|^4.4|^5.0",
 
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/persistence": "^1.0",

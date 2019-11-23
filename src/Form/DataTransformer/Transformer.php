@@ -16,9 +16,14 @@ use function sprintf;
 
 abstract class Transformer implements DataTransformerInterface
 {
-    protected ManagerRegistry $registry;
-    protected string $class;
-    protected string $property;
+    /** @var ManagerRegistry  */
+    protected $registry;
+
+    /** @var string */
+    protected $class;
+
+    /** @var string */
+    protected $property;
 
     public function __construct(
         ManagerRegistry $registry,
