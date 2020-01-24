@@ -98,7 +98,7 @@ class ObjectsToIdTransformerTest extends TestCase
         $transformer = new ObjectsToIdTransformer($registry, TestObject::class, 'name');
 
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected an array. Got: Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestFormModel');
+        $this->expectExceptionMessage('Expected an iterable. Got: Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestFormModel');
 
         $transformer->transform($object);
     }
