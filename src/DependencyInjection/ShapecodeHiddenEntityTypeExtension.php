@@ -11,6 +11,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class ShapecodeHiddenEntityTypeExtension extends Extension
 {
+    /**
+     * @inheritDoc
+     */
     public function load(array $configs, ContainerBuilder $container) : void
     {
         $locator = new FileLocator(__DIR__ . '/../Resources/config');
