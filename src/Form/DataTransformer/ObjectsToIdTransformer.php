@@ -25,7 +25,6 @@ class ObjectsToIdTransformer extends Transformer
             return null;
         }
 
-        Assert::isArray($entity);
         Assert::allIsInstanceOf($entity, $this->class);
 
         $accessor = PropertyAccess::createPropertyAccessor();
@@ -67,7 +66,6 @@ class ObjectsToIdTransformer extends Transformer
             throw new TransformationFailedException(sprintf('Can\'t find entity of class "%s" with property "%s" = "%s".', $class, $property, $id));
         }
 
-        Assert::isArray($results);
         Assert::allIsInstanceOf($results, $this->class);
 
         return $results;

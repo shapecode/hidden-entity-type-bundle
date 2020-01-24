@@ -23,11 +23,11 @@ class HiddenObjectType extends AbstractType
     }
 
     /**
-     * @inheritdoc
+     * @param mixed[] $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
-        $transformerClassName = $options['multiple'] ? ObjectsToIdTransformer::class : ObjectToIdTransformer::class;
+        $transformerClassName = $options['multiple'] === true ? ObjectsToIdTransformer::class : ObjectToIdTransformer::class;
 
         $transformer = new $transformerClassName(
             $this->registry,

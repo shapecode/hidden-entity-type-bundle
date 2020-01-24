@@ -51,13 +51,14 @@
         "doctrine/coding-standard": "^7.0",
         "roave/security-advisories": "dev-master",
         "squizlabs/php_codesniffer": "^3.4",
-        "phpstan/phpstan": "^0.11.16",
-        "phpstan/phpstan-deprecation-rules": "^0.11.2",
-        "phpstan/phpstan-phpunit": "^0.11.2",
-        "phpstan/phpstan-strict-rules": "^0.11.1",
+        "phpstan/phpstan": "~0.11",
+        "phpstan/phpstan-deprecation-rules": "~0.11",
+        "phpstan/phpstan-phpunit": "~0.11",
+        "phpstan/phpstan-strict-rules": "~0.11",
+        "phpstan/phpstan-webmozart-assert": "~0.12",
         "maglnet/composer-require-checker": "^2.0",
         "phpunit/phpunit": "^8.4",
-        "symfony/var-dumper": "^4.3"
+        "symfony/var-dumper": "^4.4|^5.0"
     },
     "autoload": {
         "psr-4": {
