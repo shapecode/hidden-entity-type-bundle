@@ -38,9 +38,6 @@ class HiddenObjectType extends AbstractType
         $builder->addModelTransformer($transformer);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function configureOptions(OptionsResolver $resolver) : void
     {
         $resolver->setRequired(['class']);
@@ -57,17 +54,11 @@ class HiddenObjectType extends AbstractType
         $resolver->setAllowedTypes('multiple', ['boolean']);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getParent() : string
     {
         return HiddenType::class;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getBlockPrefix() : string
     {
         return 'shapecode_hidden_object';
