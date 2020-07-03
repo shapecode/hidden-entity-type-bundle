@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Form\Type;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectRepository;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenObjectType;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestFormModel;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestObject;

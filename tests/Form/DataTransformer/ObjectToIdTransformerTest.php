@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Form\DataTransformer;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectRepository;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer\ObjectToIdTransformer;

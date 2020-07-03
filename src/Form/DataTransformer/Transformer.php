@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;

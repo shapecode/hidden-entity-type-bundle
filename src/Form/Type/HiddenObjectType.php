@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer\ObjectsToIdTransformer;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer\ObjectToIdTransformer;
 use Symfony\Component\Form\AbstractType;
