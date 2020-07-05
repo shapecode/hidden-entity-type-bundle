@@ -7,6 +7,7 @@ namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Webmozart\Assert\Assert;
+
 use function count;
 use function explode;
 use function implode;
@@ -48,7 +49,7 @@ class ObjectsToIdTransformer extends Transformer
      *
      * @return array|object[]
      */
-    public function reverseTransform($id) : array
+    public function reverseTransform($id): array
     {
         if ($id === null) {
             return [];

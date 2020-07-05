@@ -5,10 +5,10 @@ includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon
     - vendor/phpstan/phpstan-phpunit/rules.neon
     - vendor/phpstan/phpstan-webmozart-assert/extension.neon
-    - phpstan-baseline.neon
 
 parameters:
     checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
     level: max
     paths:
         - src

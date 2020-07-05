@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Form\DataTransformer;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectRepository;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer\ObjectsToIdTransformer;
@@ -14,9 +14,12 @@ use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestObject;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 
+/**
+ * @covers \Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer\ObjectsToIdTransformer
+ */
 class ObjectsToIdTransformerTest extends TestCase
 {
-    public function testValidTransformation() : void
+    public function testValidTransformation(): void
     {
         $object = new TestObject();
         $object->setName('test');
@@ -39,7 +42,7 @@ class ObjectsToIdTransformerTest extends TestCase
         self::assertEquals([$object], $reversed);
     }
 
-    public function testInvalidValidTransformation() : void
+    public function testInvalidValidTransformation(): void
     {
         $object = new TestObject();
         $object->setName('test');
@@ -65,7 +68,7 @@ class ObjectsToIdTransformerTest extends TestCase
         self::assertEquals(null, $reversed);
     }
 
-    public function testInvalidProperty() : void
+    public function testInvalidProperty(): void
     {
         $registry = $this->createMock(ManagerRegistry::class);
 
@@ -75,7 +78,7 @@ class ObjectsToIdTransformerTest extends TestCase
         new ObjectsToIdTransformer($registry, TestObject::class, 'id');
     }
 
-    public function testInvalidObject() : void
+    public function testInvalidObject(): void
     {
         $object = new TestFormModel();
 
@@ -89,7 +92,7 @@ class ObjectsToIdTransformerTest extends TestCase
         $transformer->transform([$object]);
     }
 
-    public function testInvalidArray() : void
+    public function testInvalidArray(): void
     {
         $object = new TestFormModel();
 

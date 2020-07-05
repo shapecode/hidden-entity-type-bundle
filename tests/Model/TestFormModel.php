@@ -8,12 +8,12 @@ class TestFormModel
 {
     private ?TestObject $object = null;
 
-    public function getObject() : ?TestObject
+    public function getObject(): ?TestObject
     {
         return $this->object;
     }
 
-    public function setObject(?TestObject $object) : void
+    public function setObject(?TestObject $object): void
     {
         $this->object = $object;
     }

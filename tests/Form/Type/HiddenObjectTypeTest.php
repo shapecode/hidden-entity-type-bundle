@@ -4,21 +4,28 @@ declare(strict_types=1);
 
 namespace Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Form\Type;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectRepository;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenObjectType;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestFormModel;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestObject;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
+
 use function array_keys;
 
+/**
+ * @covers \Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenObjectType
+ */
 class HiddenObjectTypeTest extends TypeTestCase
 {
-    private ManagerRegistry $registry;
-    private TestObject $testObject;
+    /** @var ManagerRegistry */
+    private $registry;
 
-    protected function setUp() : void
+    /** @var TestObject */
+    private $testObject;
+
+    protected function setUp(): void
     {
         $object = new TestObject();
         $object->setName('test');
@@ -41,7 +48,7 @@ class HiddenObjectTypeTest extends TypeTestCase
     /**
      * @inheritDoc
      */
-    protected function getExtensions() : array
+    protected function getExtensions(): array
     {
         // create a type instance with the mocked dependencies
         $type = new HiddenObjectType($this->registry);
@@ -52,7 +59,7 @@ class HiddenObjectTypeTest extends TypeTestCase
         ];
     }
 
-    public function testSubmitValidData() : void
+    public function testSubmitValidData(): void
     {
         $formData = [
             'object' => 'test',

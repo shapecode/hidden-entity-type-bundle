@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer\ObjectsToIdTransformer;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer\ObjectToIdTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -25,7 +25,7 @@ class HiddenObjectType extends AbstractType
     /**
      * @param mixed[] $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) : void
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $transformerClassName = $options['multiple'] === true ? ObjectsToIdTransformer::class : ObjectToIdTransformer::class;
 
@@ -38,7 +38,7 @@ class HiddenObjectType extends AbstractType
         $builder->addModelTransformer($transformer);
     }
 
-    public function configureOptions(OptionsResolver $resolver) : void
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired(['class']);
 
@@ -54,12 +54,12 @@ class HiddenObjectType extends AbstractType
         $resolver->setAllowedTypes('multiple', ['boolean']);
     }
 
-    public function getParent() : string
+    public function getParent(): string
     {
         return HiddenType::class;
     }
 
-    public function getBlockPrefix() : string
+    public function getBlockPrefix(): string
     {
         return 'shapecode_hidden_object';
     }

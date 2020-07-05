@@ -16,7 +16,7 @@ class TestFormType extends AbstractType
     /**
      * @inheritDoc
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) : void
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('object', HiddenObjectType::class, [
             'class'    => TestObject::class,
@@ -24,7 +24,7 @@ class TestFormType extends AbstractType
         ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver) : void
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => TestFormModel::class,
