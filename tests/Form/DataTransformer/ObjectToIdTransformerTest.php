@@ -61,7 +61,9 @@ class ObjectToIdTransformerTest extends TestCase
         $transformer = new ObjectToIdTransformer($registry, TestObject::class, 'name');
 
         $this->expectException(TransformationFailedException::class);
+        // phpcs:disable Generic.Files.LineLength.TooLong
         $this->expectExceptionMessage('Can\'t find entity of class "Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestObject" with property "name" = "test".');
+        // phpcs:enable Generic.Files.LineLength.TooLong
 
         $transformed = $transformer->transform($object);
         $reversed    = $transformer->reverseTransform('test');
@@ -100,7 +102,9 @@ class ObjectToIdTransformerTest extends TestCase
         $transformer = new ObjectToIdTransformer($registry, TestObject::class, 'name');
 
         $this->expectException(InvalidArgumentException::class);
+        // phpcs:disable Generic.Files.LineLength.TooLong
         $this->expectExceptionMessage('Expected an instance of Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestObject. Got: Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestFormModel');
+        // phpcs:enable Generic.Files.LineLength.TooLong
 
         $transformer->transform($object);
     }

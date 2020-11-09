@@ -18,8 +18,7 @@ use function array_keys;
  */
 class HiddenObjectTypeFailedTest extends TypeTestCase
 {
-    /** @var ManagerRegistry  */
-    private $registry;
+    private ManagerRegistry $registry;
 
     protected function setUp(): void
     {

@@ -13,17 +13,16 @@ use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 use function array_keys;
+use function assert;
 
 /**
  * @covers \Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenObjectType
  */
 class HiddenObjectTypeTest extends TypeTestCase
 {
-    /** @var ManagerRegistry */
-    private $registry;
+    private ManagerRegistry $registry;
 
-    /** @var TestObject */
-    private $testObject;
+    private TestObject $testObject;
 
     protected function setUp(): void
     {
@@ -70,8 +69,11 @@ class HiddenObjectTypeTest extends TypeTestCase
         $form = $this->factory->create(TestFormType::class, $data);
         $form->submit($formData);
 
+        $testObject = $data->getObject();
+        assert($testObject instanceof TestObject);
+
         self::assertTrue($form->isSynchronized());
-        self::assertEquals($this->testObject->getName(), $data->getObject()->getName());
+        self::assertEquals($this->testObject->getName(), $testObject->getName());
 
         $view     = $form->createView();
         $children = $view->children;

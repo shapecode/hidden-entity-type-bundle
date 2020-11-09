@@ -14,8 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class HiddenObjectType extends AbstractType
 {
-    /** @var ManagerRegistry */
-    protected $registry;
+    protected ManagerRegistry $registry;
 
     public function __construct(ManagerRegistry $registry)
     {

@@ -12,4 +12,4 @@ parameters:
     level: max
     paths:
         - src
-        - test
+        - tests
