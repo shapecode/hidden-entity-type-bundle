@@ -30,24 +30,24 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.4|^8.0",
 
-        "symfony/framework-bundle": "^3.4|^4.4|^5.0",
-        "symfony/config": "^3.4|^4.4|^5.0",
-        "symfony/http-kernel": "^3.4|^4.4|^5.0",
-        "symfony/dependency-injection": "^3.4|^4.4|^5.0",
-        "symfony/form": "^3.4|^4.4|^5.0",
-        "symfony/yaml": "^3.4|^4.4|^5.0",
-        "symfony/options-resolver": "^3.4|^4.4|^5.0",
-        "symfony/property-access": "^3.4|^4.4|^5.0",
-        "symfony/property-info": "^3.4|^4.4|^5.0",
+        "symfony/framework-bundle": "^4.4|^5.0",
+        "symfony/config": "^4.4|^5.0",
+        "symfony/http-kernel": "^4.4|^5.0",
+        "symfony/dependency-injection": "^4.4|^5.0",
+        "symfony/form": "^4.4|^5.0",
+        "symfony/yaml": "^4.4|^5.0",
+        "symfony/options-resolver": "^4.4|^5.0",
+        "symfony/property-access": "^4.4|^5.0",
+        "symfony/property-info": "^4.4|^5.0",
 
         "doctrine/persistence": "^1.3|^2.0",
         "webmozart/assert": "^1.9"
     },
     "require-dev": {
         "icanhazstring/composer-unused": "~0.7",
-        "doctrine/coding-standard": "^8.2",
+        "doctrine/coding-standard": "^9.0",
         "roave/security-advisories": "dev-master",
         "squizlabs/php_codesniffer": "^3.5",
         "phpstan/phpstan": "~0.12",
@@ -57,7 +57,7 @@
         "phpstan/phpstan-webmozart-assert": "~0.12",
         "maglnet/composer-require-checker": "^2.0",
         "phpunit/phpunit": "^9.2",
-        "symfony/var-dumper": "^4.4|^5.0"
+        "symfony/var-dumper": "^5.0"
     },
     "autoload": {
         "psr-4": {
