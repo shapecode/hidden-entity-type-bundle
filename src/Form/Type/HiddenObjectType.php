@@ -12,6 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use function assert;
+use function is_string;
+
 class HiddenObjectType extends AbstractType
 {
     protected ManagerRegistry $registry;
@@ -22,16 +25,22 @@ class HiddenObjectType extends AbstractType
     }
 
     /**
-     * @param mixed[] $options
+     * @param array<string, mixed> $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $transformerClassName = $options['multiple'] === true ? ObjectsToIdTransformer::class : ObjectToIdTransformer::class;
 
+        /** @var string<class-string> $class */
+        $class = $options['class'];
+
+        $property = $options['property'];
+        assert(is_string($property));
+
         $transformer = new $transformerClassName(
             $this->registry,
-            $options['class'],
-            $options['property']
+            $class,
+            $property
         );
 
         $builder->addModelTransformer($transformer);
@@ -49,7 +58,7 @@ class HiddenObjectType extends AbstractType
         ]);
 
         $resolver->setAllowedTypes('invalid_message', ['null', 'string']);
-        $resolver->setAllowedTypes('property', ['null', 'string']);
+        $resolver->setAllowedTypes('property', ['string']);
         $resolver->setAllowedTypes('multiple', ['boolean']);
     }
 

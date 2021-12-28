@@ -1,0 +1,62 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Parameter \\#1 \\$objectOrArray of method Symfony\\\\Component\\\\PropertyAccess\\\\PropertyAccessor\\:\\:getValue\\(\\) expects array\\|object, mixed given\\.$#"
+			count: 1
+			path: src/Form/DataTransformer/ObjectToIdTransformer.php
+
+		-
+			message: "#^Parameter \\#1 \\$objectOrArray of method Symfony\\\\Component\\\\PropertyAccess\\\\PropertyAccessor\\:\\:isReadable\\(\\) expects array\\|object, mixed given\\.$#"
+			count: 1
+			path: src/Form/DataTransformer/ObjectToIdTransformer.php
+
+		-
+			message: "#^Parameter \\#4 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Form/DataTransformer/ObjectToIdTransformer.php
+
+		-
+			message: "#^Return type \\(mixed\\) of method Shapecode\\\\Bundle\\\\HiddenEntityTypeBundle\\\\Form\\\\DataTransformer\\\\ObjectToIdTransformer\\:\\:transform\\(\\) should be covariant with return type \\(string\\|null\\) of method Symfony\\\\Component\\\\Form\\\\DataTransformerInterface\\<object,string\\>\\:\\:transform\\(\\)$#"
+			count: 2
+			path: src/Form/DataTransformer/ObjectToIdTransformer.php
+
+		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Form/DataTransformer/ObjectsToIdTransformer.php
+
+		-
+			message: "#^Parameter \\#1 \\$objectOrArray of method Symfony\\\\Component\\\\PropertyAccess\\\\PropertyAccessor\\:\\:getValue\\(\\) expects array\\|object, mixed given\\.$#"
+			count: 1
+			path: src/Form/DataTransformer/ObjectsToIdTransformer.php
+
+		-
+			message: "#^Parameter \\#1 \\$objectOrArray of method Symfony\\\\Component\\\\PropertyAccess\\\\PropertyAccessor\\:\\:isReadable\\(\\) expects array\\|object, mixed given\\.$#"
+			count: 1
+			path: src/Form/DataTransformer/ObjectsToIdTransformer.php
+
+		-
+			message: "#^Parameter \\#2 \\$string of function explode expects string, mixed given\\.$#"
+			count: 1
+			path: src/Form/DataTransformer/ObjectsToIdTransformer.php
+
+		-
+			message: "#^Parameter \\#4 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Form/DataTransformer/ObjectsToIdTransformer.php
+
+		-
+			message: "#^Return type \\(mixed\\) of method Shapecode\\\\Bundle\\\\HiddenEntityTypeBundle\\\\Form\\\\DataTransformer\\\\ObjectsToIdTransformer\\:\\:transform\\(\\) should be covariant with return type \\(string\\|null\\) of method Symfony\\\\Component\\\\Form\\\\DataTransformerInterface\\<array\\<object\\>,string\\>\\:\\:transform\\(\\)$#"
+			count: 2
+			path: src/Form/DataTransformer/ObjectsToIdTransformer.php
+
+		-
+			message: "#^PHPDoc tag @param for parameter \\$class contains unresolvable type\\.$#"
+			count: 1
+			path: src/Form/DataTransformer/Transformer.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$class contains unresolvable type\\.$#"
+			count: 1
+			path: src/Form/Type/HiddenObjectType.php
+

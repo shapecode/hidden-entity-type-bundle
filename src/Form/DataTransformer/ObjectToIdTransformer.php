@@ -10,12 +10,15 @@ use Webmozart\Assert\Assert;
 
 use function sprintf;
 
+/**
+ * @template-extends Transformer<object, string>
+ */
 class ObjectToIdTransformer extends Transformer
 {
     /**
-     * @param mixed $entity
+     * @param object|mixed $entity
      *
-     * @return string|int|float|null
+     * @return mixed|string
      */
     public function transform($entity)
     {
@@ -36,7 +39,7 @@ class ObjectToIdTransformer extends Transformer
     }
 
     /**
-     * @param mixed $id
+     * @param string|mixed $id
      */
     public function reverseTransform($id): ?object
     {

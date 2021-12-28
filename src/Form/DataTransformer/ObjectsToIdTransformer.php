@@ -13,12 +13,15 @@ use function explode;
 use function implode;
 use function sprintf;
 
+/**
+ * @template-extends Transformer<object[], string>
+ */
 class ObjectsToIdTransformer extends Transformer
 {
     /**
-     * @param object[]|array|mixed $entity
+     * @param object[]|mixed $entity
      *
-     * @return string|int|float|null
+     * @return string|mixed
      */
     public function transform($entity)
     {
@@ -45,9 +48,9 @@ class ObjectsToIdTransformer extends Transformer
     }
 
     /**
-     * @param mixed $id
+     * @param string|mixed $id
      *
-     * @return array|object[]
+     * @return object[]
      */
     public function reverseTransform($id): array
     {

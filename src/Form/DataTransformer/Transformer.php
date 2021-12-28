@@ -15,6 +15,11 @@ use Webmozart\Assert\Assert;
 use function in_array;
 use function sprintf;
 
+/**
+ * @template TKey
+ * @template T
+ * @template-implements  DataTransformerInterface<TKey, T>
+ */
 abstract class Transformer implements DataTransformerInterface
 {
     protected ManagerRegistry $registry;
@@ -24,6 +29,9 @@ abstract class Transformer implements DataTransformerInterface
 
     protected string $property;
 
+    /**
+     * @param string<class-string> $class
+     */
     public function __construct(
         ManagerRegistry $registry,
         string $class,
