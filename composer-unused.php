@@ -7,5 +7,6 @@ use ComposerUnused\ComposerUnused\Configuration\NamedFilter;
 
 return static function (Configuration $config): Configuration {
     return $config
+        ->addNamedFilter(NamedFilter::fromString('symfony/framework-bundle'))
         ->addNamedFilter(NamedFilter::fromString('symfony/yaml'));
 };
