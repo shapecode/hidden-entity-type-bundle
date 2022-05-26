@@ -6,12 +6,13 @@ namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectRepository;
+use InvalidArgumentException;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
-use Webmozart\Assert\Assert;
 
+use function class_exists;
 use function in_array;
 use function sprintf;
 
@@ -30,14 +31,16 @@ abstract class Transformer implements DataTransformerInterface
     protected string $property;
 
     /**
-     * @param string<class-string> $class
+     * @param class-string $class
      */
     public function __construct(
         ManagerRegistry $registry,
         string $class,
         string $property = 'id'
     ) {
-        Assert::classExists($class);
+        if (! class_exists($class)) {
+            throw new InvalidArgumentException(sprintf('Expected an existing class name. Got: "%s"', $class));
+        }
 
         $this->registry = $registry;
         $this->class    = $class;

@@ -31,7 +31,7 @@ class HiddenObjectType extends AbstractType
     {
         $transformerClassName = $options['multiple'] === true ? ObjectsToIdTransformer::class : ObjectToIdTransformer::class;
 
-        /** @var string<class-string> $class */
+        /** @phpstan-var class-string $class */
         $class = $options['class'];
 
         $property = $options['property'];

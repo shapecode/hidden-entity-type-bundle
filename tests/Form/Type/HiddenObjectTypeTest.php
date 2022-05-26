@@ -9,6 +9,7 @@ use Doctrine\Persistence\ObjectRepository;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenObjectType;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestFormModel;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestObject;
+use Symfony\Component\Form\FormExtensionInterface;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 
@@ -45,7 +46,7 @@ class HiddenObjectTypeTest extends TypeTestCase
     }
 
     /**
-     * @inheritDoc
+     * @return list<FormExtensionInterface>
      */
     protected function getExtensions(): array
     {

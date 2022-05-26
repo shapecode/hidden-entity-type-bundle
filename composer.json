@@ -42,7 +42,7 @@
         "symfony/property-access": "^4.4|^5.4|^6.0",
         "symfony/property-info": "^4.4|^5.4|^6.0",
 
-        "doctrine/persistence": "^1.3|^2.0",
+        "doctrine/persistence": "^1.3|^2.0|^3.0",
         "webmozart/assert": "^1.9"
     },
     "require-dev": {
@@ -73,7 +73,7 @@
     "scripts": {
         "check": [
             "@crc",
-            "@unuse",
+            "@unused",
             "@cs-fix",
             "@cs-check",
             "@phpstan",
@@ -85,7 +85,7 @@
         "phpunit": "phpunit --colors=always",
         "cs-check": "phpcs -s",
         "cs-fix": "phpcbf",
-        "unuse": "composer unused --excludeDir=vendor --excludeDir=var --excludeDir=node_modules --ansi"
+        "unused": "vendor/bin/composer-unused"
     },
     "extra": {
         "branch-alias": {

@@ -107,6 +107,7 @@ class ObjectsToIdTransformerTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected an iterable. Got: Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestFormModel');
 
+        // @phpstan-ignore-next-line
         $transformer->transform($object);
     }
 }

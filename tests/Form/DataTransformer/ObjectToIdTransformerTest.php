@@ -120,6 +120,7 @@ class ObjectToIdTransformerTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected an instance of Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestObject. Got: array');
 
+        // @phpstan-ignore-next-line
         $transformer->transform([$object]);
     }
 
@@ -130,6 +131,7 @@ class ObjectToIdTransformerTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected an existing class name. Got: "FakeClass"');
 
+        // @phpstan-ignore-next-line
         new ObjectToIdTransformer($registry, 'FakeClass', 'name');
     }
 }

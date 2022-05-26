@@ -19,9 +19,9 @@ use function sprintf;
 class ObjectsToIdTransformer extends Transformer
 {
     /**
-     * @param object[]|mixed $entity
+     * @phpstan-param object[]|null $entity
      *
-     * @return string|mixed
+     * @phpstan-return string|null
      */
     public function transform($entity)
     {
@@ -48,9 +48,9 @@ class ObjectsToIdTransformer extends Transformer
     }
 
     /**
-     * @param string|mixed $id
+     * @phpstan-param string|null $id
      *
-     * @return object[]
+     * @phpstan-return object[]
      */
     public function reverseTransform($id): array
     {

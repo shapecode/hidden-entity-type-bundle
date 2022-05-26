@@ -8,6 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectRepository;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenObjectType;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestFormModel;
+use Symfony\Component\Form\FormExtensionInterface;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 
@@ -36,7 +37,7 @@ class HiddenObjectTypeFailedTest extends TypeTestCase
     }
 
     /**
-     * @inheritDoc
+     * @return list<FormExtensionInterface>
      */
     protected function getExtensions(): array
     {
