@@ -23,28 +23,18 @@ use function sprintf;
  */
 abstract class Transformer implements DataTransformerInterface
 {
-    protected ManagerRegistry $registry;
-
-    /** @var class-string */
-    protected string $class;
-
-    protected string $property;
-
-    /**
-     * @param class-string $class
-     */
+    /** @param class-string $class */
     public function __construct(
-        ManagerRegistry $registry,
-        string $class,
-        string $property = 'id'
+        protected readonly ManagerRegistry $registry,
+        protected readonly string $class,
+        protected readonly string $property = 'id',
     ) {
         if (! class_exists($class)) {
-            throw new InvalidArgumentException(sprintf('Expected an existing class name. Got: "%s"', $class));
+            throw new InvalidArgumentException(
+                sprintf('Expected an existing class name. Got: "%s"', $class),
+                1701527124965,
+            );
         }
-
-        $this->registry = $registry;
-        $this->class    = $class;
-        $this->property = $property;
 
         $this->validate();
     }
@@ -54,9 +44,7 @@ abstract class Transformer implements DataTransformerInterface
         return $this->registry->getRepository($this->getClass());
     }
 
-    /**
-     * @return class-string
-     */
+    /** @return class-string */
     protected function getClass(): string
     {
         return $this->class;
@@ -75,7 +63,10 @@ abstract class Transformer implements DataTransformerInterface
         $properties = $propertyInfo->getProperties($this->class) ?? [];
 
         if (! in_array($this->property, $properties, true)) {
-            throw new NoSuchPropertyException(sprintf('property %s is missing in class %s', $this->property, $this->class));
+            throw new NoSuchPropertyException(
+                sprintf('property %s is missing in class %s', $this->property, $this->class),
+                1701527107565,
+            );
         }
     }
 }

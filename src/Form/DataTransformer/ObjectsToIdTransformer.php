@@ -13,48 +13,36 @@ use function explode;
 use function implode;
 use function sprintf;
 
-/**
- * @template-extends Transformer<object[], string>
- */
+/** @template-extends Transformer<object[], string> */
 class ObjectsToIdTransformer extends Transformer
 {
-    /**
-     * @phpstan-param object[]|null $entity
-     *
-     * @phpstan-return string|null
-     */
-    public function transform($entity)
+    public function transform(mixed $value): mixed
     {
-        if ($entity === null) {
+        if ($value === null) {
             return null;
         }
 
-        Assert::allIsInstanceOf($entity, $this->class);
+        Assert::allIsInstanceOf($value, $this->class);
 
         $accessor = PropertyAccess::createPropertyAccessor();
         $property = $this->getProperty();
 
-        $value = [];
+        $valueIds = [];
 
-        foreach ($entity as $e) {
+        foreach ($value as $e) {
             if (! $accessor->isReadable($e, $property)) {
                 continue;
             }
 
-            $value[] = $accessor->getValue($e, $property);
+            $valueIds[] = $accessor->getValue($e, $property);
         }
 
-        return implode(',', $value);
+        return implode(',', $valueIds);
     }
 
-    /**
-     * @phpstan-param string|null $id
-     *
-     * @phpstan-return object[]
-     */
-    public function reverseTransform($id): array
+    public function reverseTransform(mixed $value): mixed
     {
-        if ($id === null) {
+        if ($value === null) {
             return [];
         }
 
@@ -62,12 +50,15 @@ class ObjectsToIdTransformer extends Transformer
         $property = $this->getProperty();
         $class    = $this->getClass();
 
-        $ids = explode(',', $id);
+        $ids = explode(',', $value);
 
         $results = $repo->findBy([$property => $ids]);
 
         if (count($results) === 0) {
-            throw new TransformationFailedException(sprintf('Can\'t find entity of class "%s" with property "%s" = "%s".', $class, $property, $id));
+            throw new TransformationFailedException(
+                sprintf('Can\'t find entity of class "%s" with property "%s" = "%s".', $class, $property, $value),
+                1701526676576,
+            );
         }
 
         Assert::allIsInstanceOf($results, $this->class);

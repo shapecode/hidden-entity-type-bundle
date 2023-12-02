@@ -7,7 +7,7 @@
     <arg name="parallel" value="4"/>
     <arg name="cache" value="./phpcs.cache" />
 
-    <config name="php_version" value="70419"/>
+    <config name="php_version" value="80300"/>
 
     <file>src/</file>
     <file>tests/</file>

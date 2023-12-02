@@ -13,52 +13,40 @@ use function is_numeric;
 use function is_string;
 use function sprintf;
 
-/**
- * @template-extends Transformer<object, string>
- */
+/** @template-extends Transformer<object, string> */
 class ObjectToIdTransformer extends Transformer
 {
-    /**
-     * @phpstan-param object|null $entity
-     *
-     * @phpstan-return string|null
-     */
-    public function transform($entity)
+    public function transform(mixed $value): mixed
     {
-        if ($entity === null) {
-            return null;
-        }
-
-        Assert::isInstanceOf($entity, $this->class);
-
-        $accessor = PropertyAccess::createPropertyAccessor();
-        $property = $this->getProperty();
-
-        if (! $accessor->isReadable($entity, $property)) {
-            return null;
-        }
-
-        $value = $accessor->getValue($entity, $property);
-
         if ($value === null) {
             return null;
         }
 
-        if (! is_string($value) && ! is_numeric($value)) {
+        Assert::isInstanceOf($value, $this->class);
+
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $property = $this->getProperty();
+
+        if (! $accessor->isReadable($value, $property)) {
+            return null;
+        }
+
+        $valueObject = $accessor->getValue($value, $property);
+
+        if ($valueObject === null) {
+            return null;
+        }
+
+        if (! is_string($valueObject) && ! is_numeric($valueObject)) {
             throw new LogicException('id hast to be string or integer', 1653564596059);
         }
 
-        return (string) $value;
+        return (string) $valueObject;
     }
 
-    /**
-     * @phpstan-param string|null $id
-     *
-     * @phpstan-return object|null
-     */
-    public function reverseTransform($id): ?object
+    public function reverseTransform(mixed $value): mixed
     {
-        if ($id === null) {
+        if ($value === null) {
             return null;
         }
 
@@ -67,11 +55,14 @@ class ObjectToIdTransformer extends Transformer
         $class    = $this->getClass();
 
         $result = $repo->findOneBy([
-            $property => $id,
+            $property => $value,
         ]);
 
         if ($result === null) {
-            throw new TransformationFailedException(sprintf('Can\'t find entity of class "%s" with property "%s" = "%s".', $class, $property, $id));
+            throw new TransformationFailedException(
+                sprintf('Can\'t find entity of class "%s" with property "%s" = "%s".', $class, $property, $value),
+                1701526691297,
+            );
         }
 
         Assert::isInstanceOf($result, $this->class);

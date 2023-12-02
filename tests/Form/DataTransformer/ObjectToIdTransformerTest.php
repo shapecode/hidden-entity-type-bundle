@@ -7,6 +7,7 @@ namespace Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Form\DataTransformer;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectRepository;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer\ObjectToIdTransformer;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestFormModel;
@@ -14,9 +15,7 @@ use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestObject;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 
-/**
- * @covers \Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer\ObjectToIdTransformer
- */
+#[CoversClass(ObjectToIdTransformer::class)]
 class ObjectToIdTransformerTest extends TestCase
 {
     public function testValidTransformation(): void

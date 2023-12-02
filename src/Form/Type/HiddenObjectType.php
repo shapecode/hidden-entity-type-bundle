@@ -17,16 +17,12 @@ use function is_string;
 
 class HiddenObjectType extends AbstractType
 {
-    protected ManagerRegistry $registry;
-
-    public function __construct(ManagerRegistry $registry)
-    {
-        $this->registry = $registry;
+    public function __construct(
+        protected readonly ManagerRegistry $registry,
+    ) {
     }
 
-    /**
-     * @param array<string, mixed> $options
-     */
+    /** @param array<string, mixed> $options */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $transformerClassName = $options['multiple'] === true ? ObjectsToIdTransformer::class : ObjectToIdTransformer::class;
@@ -40,7 +36,7 @@ class HiddenObjectType extends AbstractType
         $transformer = new $transformerClassName(
             $this->registry,
             $class,
-            $property
+            $property,
         );
 
         $builder->addModelTransformer($transformer);

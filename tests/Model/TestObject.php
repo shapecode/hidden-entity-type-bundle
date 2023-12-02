@@ -6,14 +6,14 @@ namespace Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model;
 
 class TestObject
 {
-    protected ?string $name = null;
+    protected string|null $name = null;
 
-    public function getName(): ?string
+    public function getName(): string|null
     {
         return $this->name;
     }
 
-    public function setName(?string $name): void
+    public function setName(string|null $name): void
     {
         $this->name = $name;
     }

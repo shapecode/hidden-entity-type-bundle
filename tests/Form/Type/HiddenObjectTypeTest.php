@@ -6,6 +6,7 @@ namespace Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Form\Type;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectRepository;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenObjectType;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestFormModel;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestObject;
@@ -16,9 +17,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 use function array_keys;
 use function assert;
 
-/**
- * @covers \Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenObjectType
- */
+#[CoversClass(HiddenObjectType::class)]
 class HiddenObjectTypeTest extends TypeTestCase
 {
     private ManagerRegistry $registry;
@@ -45,9 +44,7 @@ class HiddenObjectTypeTest extends TypeTestCase
         parent::setUp();
     }
 
-    /**
-     * @return list<FormExtensionInterface>
-     */
+    /** @return list<FormExtensionInterface> */
     protected function getExtensions(): array
     {
         // create a type instance with the mocked dependencies

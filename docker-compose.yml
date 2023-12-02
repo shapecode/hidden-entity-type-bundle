@@ -1,8 +1,9 @@
 version: '3.6'
 services:
     app:
-        image: webdevops/php:7.4
+        image: webdevops/php:8.3
         volumes:
             - ./:/app/
-        env_file:
-            - etc/environment.yml
+        environment:
+            PHP_MEMORY_LIMIT: 4G
+            PHP_DATE_TIMEZONE: Europe/Berlin

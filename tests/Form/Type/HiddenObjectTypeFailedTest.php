@@ -6,6 +6,7 @@ namespace Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Form\Type;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectRepository;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenObjectType;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestFormModel;
 use Symfony\Component\Form\FormExtensionInterface;
@@ -14,9 +15,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 use function array_keys;
 
-/**
- * @covers \Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type\HiddenObjectType
- */
+#[CoversClass(HiddenObjectType::class)]
 class HiddenObjectTypeFailedTest extends TypeTestCase
 {
     private ManagerRegistry $registry;
@@ -36,9 +35,7 @@ class HiddenObjectTypeFailedTest extends TypeTestCase
         parent::setUp();
     }
 
-    /**
-     * @return list<FormExtensionInterface>
-     */
+    /** @return list<FormExtensionInterface> */
     protected function getExtensions(): array
     {
         // create a type instance with the mocked dependencies
