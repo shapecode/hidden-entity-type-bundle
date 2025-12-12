@@ -30,12 +30,12 @@ class HiddenObjectTypeTest extends TypeTestCase
         $object->setName('test');
 
         // mock any dependencies
-        $objectRepository = $this->createConfiguredMock(ObjectRepository::class, [
+        $objectRepository = self::createConfiguredStub(ObjectRepository::class, [
             'findOneBy' => $object,
             'findBy'    => [$object],
         ]);
 
-        $this->registry = $this->createConfiguredMock(ManagerRegistry::class, [
+        $this->registry = self::createConfiguredStub(ManagerRegistry::class, [
             'getRepository' => $objectRepository,
         ]);
 
@@ -71,7 +71,7 @@ class HiddenObjectTypeTest extends TypeTestCase
         assert($testObject instanceof TestObject);
 
         self::assertTrue($form->isSynchronized());
-        self::assertEquals($this->testObject->getName(), $testObject->getName());
+        self::assertSame($this->testObject->getName(), $testObject->getName());
 
         $view     = $form->createView();
         $children = $view->children;

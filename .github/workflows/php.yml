@@ -15,7 +15,8 @@ jobs:
 
     strategy:
       matrix:
-        php-versions: [ '8.2', '8.3' ]
+          php-versions: [ '8.4', '8.5' ]
+          dependencies: [ 'locked', 'latest', 'lowest' ]
 
     steps:
     - uses: actions/checkout@v2
@@ -26,10 +27,13 @@ jobs:
         php-version: ${{ matrix.php-versions }}
 
     - name: Validate composer.json and composer.lock
-      run: composer validate
+      run: composer validate --strict -n
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Install Composer dependencies
+      uses: ramsey/composer-install@v3
+      with:
+        dependency-versions: ${{ matrix.dependencies }}
+        composer-options: --prefer-dist --no-suggest --no-scripts
 
     - name: Run Check
       run: composer check

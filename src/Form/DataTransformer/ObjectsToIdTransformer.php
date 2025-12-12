@@ -6,23 +6,20 @@ namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Webmozart\Assert\Assert;
 
 use function count;
 use function explode;
 use function implode;
 use function sprintf;
 
-/** @template-extends Transformer<object[], string> */
-class ObjectsToIdTransformer extends Transformer
+/** @template-extends Transformer<array<array-key, object>, string> */
+final readonly class ObjectsToIdTransformer extends Transformer
 {
-    public function transform(mixed $value): mixed
+    public function transform(mixed $value): string|null
     {
         if ($value === null) {
             return null;
         }
-
-        Assert::allIsInstanceOf($value, $this->class);
 
         $accessor = PropertyAccess::createPropertyAccessor();
         $property = $this->getProperty();
@@ -40,7 +37,8 @@ class ObjectsToIdTransformer extends Transformer
         return implode(',', $valueIds);
     }
 
-    public function reverseTransform(mixed $value): mixed
+    /** @return array<array-key, object> */
+    public function reverseTransform(mixed $value): array
     {
         if ($value === null) {
             return [];
@@ -60,8 +58,6 @@ class ObjectsToIdTransformer extends Transformer
                 1701526676576,
             );
         }
-
-        Assert::allIsInstanceOf($results, $this->class);
 
         return $results;
     }

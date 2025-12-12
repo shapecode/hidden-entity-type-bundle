@@ -7,7 +7,8 @@ namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class HiddenDocumentType extends AbstractType
+/** @template-extends AbstractType<object> */
+final class HiddenDocumentType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver): void
     {

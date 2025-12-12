@@ -23,12 +23,12 @@ class HiddenObjectTypeFailedTest extends TypeTestCase
     protected function setUp(): void
     {
         // mock any dependencies
-        $objectRepository = $this->createConfiguredMock(ObjectRepository::class, [
+        $objectRepository = self::createConfiguredStub(ObjectRepository::class, [
             'findOneBy' => null,
             'findBy'    => [],
         ]);
 
-        $this->registry = $this->createConfiguredMock(ManagerRegistry::class, [
+        $this->registry = self::createConfiguredStub(ManagerRegistry::class, [
             'getRepository' => $objectRepository,
         ]);
 

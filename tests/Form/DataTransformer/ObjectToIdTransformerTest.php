@@ -10,7 +10,6 @@ use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer\ObjectToIdTransformer;
-use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestFormModel;
 use Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestObject;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
@@ -24,12 +23,12 @@ class ObjectToIdTransformerTest extends TestCase
         $object->setName('test');
 
         // mock any dependencies
-        $objectRepository = $this->createConfiguredMock(ObjectRepository::class, [
+        $objectRepository = self::createConfiguredStub(ObjectRepository::class, [
             'findOneBy' => $object,
             'findBy'    => [$object],
         ]);
 
-        $registry = $this->createConfiguredMock(ManagerRegistry::class, [
+        $registry = self::createConfiguredStub(ManagerRegistry::class, [
             'getRepository' => $objectRepository,
         ]);
 
@@ -38,7 +37,7 @@ class ObjectToIdTransformerTest extends TestCase
         $transformed = $transformer->transform($object);
         $reversed    = $transformer->reverseTransform('test');
 
-        self::assertEquals('test', $transformed);
+        self::assertSame('test', $transformed);
         self::assertEquals($object, $reversed);
     }
 
@@ -48,12 +47,12 @@ class ObjectToIdTransformerTest extends TestCase
         $object->setName('test');
 
         // mock any dependencies
-        $objectRepository = $this->createConfiguredMock(ObjectRepository::class, [
+        $objectRepository = self::createConfiguredStub(ObjectRepository::class, [
             'findOneBy' => null,
             'findBy'    => [null],
         ]);
 
-        $registry = $this->createConfiguredMock(ManagerRegistry::class, [
+        $registry = self::createConfiguredStub(ManagerRegistry::class, [
             'getRepository' => $objectRepository,
         ]);
 
@@ -67,7 +66,7 @@ class ObjectToIdTransformerTest extends TestCase
         $transformed = $transformer->transform($object);
         $reversed    = $transformer->reverseTransform('test');
 
-        self::assertEquals('test', $transformed);
+        self::assertSame('test', $transformed);
         self::assertEquals(null, $reversed);
     }
 
@@ -77,12 +76,12 @@ class ObjectToIdTransformerTest extends TestCase
         $object->setName('test');
 
         // mock any dependencies
-        $objectRepository = $this->createConfiguredMock(ObjectRepository::class, [
+        $objectRepository = self::createConfiguredStub(ObjectRepository::class, [
             'findOneBy' => null,
             'findBy'    => [null],
         ]);
 
-        $registry = $this->createConfiguredMock(ManagerRegistry::class, [
+        $registry = self::createConfiguredStub(ManagerRegistry::class, [
             'getRepository' => $objectRepository,
         ]);
 
@@ -92,40 +91,9 @@ class ObjectToIdTransformerTest extends TestCase
         new ObjectToIdTransformer($registry, TestObject::class, 'id');
     }
 
-    public function testInvalidObject(): void
-    {
-        $object = new TestFormModel();
-
-        $registry = $this->createMock(ManagerRegistry::class);
-
-        $transformer = new ObjectToIdTransformer($registry, TestObject::class, 'name');
-
-        $this->expectException(InvalidArgumentException::class);
-        // phpcs:disable Generic.Files.LineLength.TooLong
-        $this->expectExceptionMessage('Expected an instance of Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestObject. Got: Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestFormModel');
-        // phpcs:enable Generic.Files.LineLength.TooLong
-
-        $transformer->transform($object);
-    }
-
-    public function testInvalidArray(): void
-    {
-        $object = new TestFormModel();
-
-        $registry = $this->createMock(ManagerRegistry::class);
-
-        $transformer = new ObjectToIdTransformer($registry, TestObject::class, 'name');
-
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected an instance of Shapecode\Bundle\HiddenEntityTypeBundle\Tests\Model\TestObject. Got: array');
-
-        // @phpstan-ignore-next-line
-        $transformer->transform([$object]);
-    }
-
     public function testInvalidClass(): void
     {
-        $registry = $this->createMock(ManagerRegistry::class);
+        $registry = self::createStub(ManagerRegistry::class);
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected an existing class name. Got: "FakeClass"');

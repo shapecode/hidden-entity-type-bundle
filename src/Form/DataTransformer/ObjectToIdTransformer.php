@@ -7,22 +7,19 @@ namespace Shapecode\Bundle\HiddenEntityTypeBundle\Form\DataTransformer;
 use LogicException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Webmozart\Assert\Assert;
 
 use function is_numeric;
 use function is_string;
 use function sprintf;
 
 /** @template-extends Transformer<object, string> */
-class ObjectToIdTransformer extends Transformer
+final readonly class ObjectToIdTransformer extends Transformer
 {
-    public function transform(mixed $value): mixed
+    public function transform(mixed $value): string|null
     {
         if ($value === null) {
             return null;
         }
-
-        Assert::isInstanceOf($value, $this->class);
 
         $accessor = PropertyAccess::createPropertyAccessor();
         $property = $this->getProperty();
@@ -44,7 +41,7 @@ class ObjectToIdTransformer extends Transformer
         return (string) $valueObject;
     }
 
-    public function reverseTransform(mixed $value): mixed
+    public function reverseTransform(mixed $value): object|null
     {
         if ($value === null) {
             return null;
@@ -64,8 +61,6 @@ class ObjectToIdTransformer extends Transformer
                 1701526691297,
             );
         }
-
-        Assert::isInstanceOf($result, $this->class);
 
         return $result;
     }

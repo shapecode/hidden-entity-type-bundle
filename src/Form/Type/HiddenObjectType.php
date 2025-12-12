@@ -15,7 +15,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use function assert;
 use function is_string;
 
-class HiddenObjectType extends AbstractType
+/** @template-extends AbstractType<object> */
+final class HiddenObjectType extends AbstractType
 {
     public function __construct(
         protected readonly ManagerRegistry $registry,

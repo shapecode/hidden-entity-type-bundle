@@ -21,13 +21,13 @@ use function sprintf;
  * @template T
  * @template-implements  DataTransformerInterface<TKey, T>
  */
-abstract class Transformer implements DataTransformerInterface
+abstract readonly class Transformer implements DataTransformerInterface
 {
     /** @param class-string $class */
     public function __construct(
-        protected readonly ManagerRegistry $registry,
-        protected readonly string $class,
-        protected readonly string $property = 'id',
+        protected ManagerRegistry $registry,
+        protected string $class,
+        protected string $property = 'id',
     ) {
         if (! class_exists($class)) {
             throw new InvalidArgumentException(
